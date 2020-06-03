@@ -22,7 +22,6 @@ import React from "react";
 
 // core components
 import IndexNavbar from "components/Navbars/IndexNavbar.js";
-import ExamplesNavbar from "components/Navbars/ExamplesNavbar.js";
 import IndexHeader from "components/Headers/IndexHeader.js";
 import DemoFooter from "components/Footers/DemoFooter.js";
 
@@ -40,44 +39,37 @@ import SectionDark from "views/index-sections/SectionDark.js";
 import SectionLogin from "views/index-sections/SectionLogin.js";
 import SectionExamples from "views/index-sections/SectionExamples.js";
 import SectionDownload from "views/index-sections/SectionDownload.js";
-//
-import BusquedaAutoComplete from "../components/NoLosOlvides/busquedaAutoComplete";
 
-
-
-function Index() {
-    document.documentElement.classList.remove("nav-open");
-    React.useEffect(() => {
-        document.body.classList.add("index");
-        return function cleanup() {
-            document.body.classList.remove("index");
-        };
-    });
-    return (
-        <>
-            {/* <IndexNavbar /> */}
-            <ExamplesNavbar />
-            {/* <IndexHeader /> */}
-            <div className="main">
-                <BusquedaAutoComplete />
-                {/*  */}
-                <SectionButtons />
-                <SectionNavbars />
-                <SectionNavigation />
-                <SectionProgress />
-                <SectionNotifications />
-                <SectionTypography />
-                <SectionJavaScript />
-                <SectionCarousel />
-                <SectionNucleoIcons />
-                <SectionDark />
-                <SectionLogin />
-                <SectionExamples />
-                <SectionDownload />
-                <DemoFooter />
-            </div>
-        </>
-    );
+function IndexDemo() {
+  document.documentElement.classList.remove("nav-open");
+  React.useEffect(() => {
+    document.body.classList.add("index");
+    return function cleanup() {
+      document.body.classList.remove("index");
+    };
+  });
+  return (
+    <>
+      <IndexNavbar />
+      <IndexHeader />
+      <div className="main">
+        <SectionButtons />
+        <SectionNavbars />
+        <SectionNavigation />
+        <SectionProgress />
+        <SectionNotifications />
+        <SectionTypography />
+        <SectionJavaScript />
+        <SectionCarousel />
+        <SectionNucleoIcons />
+        <SectionDark />
+        <SectionLogin />
+        <SectionExamples />
+        <SectionDownload />
+        <DemoFooter />
+      </div>
+    </>
+  );
 }
 
-export default Index;
+export default IndexDemo;

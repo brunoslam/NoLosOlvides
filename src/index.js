@@ -26,16 +26,19 @@ import "assets/scss/paper-kit.scss";
 import "assets/demo/demo.css";
 // pages
 import Index from "views/Index.js";
+import IndexDemo from "views/IndexDemo.js";
 import NucleoIcons from "views/NucleoIcons.js";
 import LandingPage from "views/examples/LandingPage.js";
 import ProfilePage from "views/examples/ProfilePage.js";
 import RegisterPage from "views/examples/RegisterPage.js";
 // others
+import Secciones from "variables/secciones";
 
 ReactDOM.render(
   <BrowserRouter>
     <Switch>
       <Route path="/index" render={props => <Index {...props} />} />
+      <Route path="/indexDemo" render={props => <IndexDemo {...props} />} />
       <Route
         path="/nucleo-icons"
         render={props => <NucleoIcons {...props} />}
@@ -52,6 +55,21 @@ ReactDOM.render(
         path="/register-page"
         render={props => <RegisterPage {...props} />}
       />
+
+      {
+        Secciones.map((seccion) => {
+          return (
+            <Route
+              path={seccion.Url}
+              render={props => <seccion.Component {...props} />}
+            />
+
+          )
+
+        })
+      }
+
+
       <Redirect to="/index" />
     </Switch>
   </BrowserRouter>,
