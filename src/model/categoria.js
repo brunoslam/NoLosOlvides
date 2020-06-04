@@ -8,7 +8,7 @@ export default class Categoria {
     }
 
     static async getCategorias() {
-        var response = await (await fetch(`${NoLosOlvidesInfo.urlApi}/api/Categorias`));
+        var response = await (await fetch(`${process.env.NODE_ENV == "development" ? NoLosOlvidesInfo.urlApi : NoLosOlvidesInfo.urlApiProd}/api/Categorias`));
         var json = await response.json();
         return json;
     }

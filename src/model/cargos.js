@@ -8,7 +8,7 @@ export default class Cargo {
     }
 
     static async getCargos() {
-        var response = await (await fetch(`${NoLosOlvidesInfo.urlApi}/api/Cargos`));
+        var response = await (await fetch(`${process.env.NODE_ENV == "development" ? NoLosOlvidesInfo.urlApi : NoLosOlvidesInfo.urlApiProd}/api/Cargos`));
         var json = await response.json();
         return json;
     }
