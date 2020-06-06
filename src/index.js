@@ -36,6 +36,8 @@ import RegisterPage from "views/examples/RegisterPage.js";
 import Secciones from "variables/secciones";
 import Login from "views/staff/login/login";
 import VerPersonaje from "views/personaje/ver/verpersonaje";
+import TablaAprobacion from "views/staff/aprobacion/tablaAprobacion";
+import AprobarCaso from "views/staff/aprobacion/aprobacion";
 
 const hist = createBrowserHistory();
 
@@ -64,6 +66,14 @@ ReactDOM.render(
       <Route
         path="/staff/login"
         render={props => <Login {...props} />}
+      />
+      <Route
+        path="/staff/aprobacion"
+        render={props => <TablaAprobacion {...props} />}
+      />
+      <Route
+        path="/staff/aprobar-caso"
+        render={props => <AprobarCaso {...props} />}
       />
       <Route
         path="/personaje"

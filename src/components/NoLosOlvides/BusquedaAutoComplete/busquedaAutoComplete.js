@@ -58,7 +58,7 @@ export default class busquedaAutoComplete extends Component {
             if (resultados.length > 0) {
                 this.setState({ busquedaNoEncontrada: false });
                 sessionStorage.setItem("asd", resultados[0].idPersonaje);
-                window.location.href = "/personaje";
+                window.location.href = "/#/personaje";
             } else {
                 this.setState({ busquedaNoEncontrada: true });
             }

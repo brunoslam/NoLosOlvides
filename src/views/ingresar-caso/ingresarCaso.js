@@ -39,13 +39,15 @@ const columns = [
 ];
 
 export default class ingresarCaso extends Component {
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
+        debugger;
         this.state = {
             rows: [
             ],
             categorias: [],
-            cargos: []
+            cargos: [],
+            casoAprobar: props.a ? JSON.parse(sessionStorage.getItem("xd")) : null
         };
         this.onGridRowsUpdated.bind(this);
         this.getCellActions.bind(this);
@@ -148,36 +150,50 @@ export default class ingresarCaso extends Component {
                         <Col className="ml-auto mr-auto" md="6">
                             <Row className="my-1">
                                 <Col className="ml-auto mr-auto text-dark font-weight-bold" md="6">*Nombre:</Col>
-                                <Col className="ml-auto mr-auto" md="6"><Input id="txtNombrePersonaje" /></Col>
+                                <Col className="ml-auto mr-auto" md="6">
+                                    <Input id="txtNombrePersonaje" disabled={this.props.a} value={this.props.a ? this.state.casoAprobar.nombre : null} />
+                                </Col>
                             </Row>
                             <Row className="my-1">
                                 <Col className="ml-auto mr-auto text-dark font-weight-bold" md="6">*Apellido:</Col>
-                                <Col className="ml-auto mr-auto" md="6"><Input id="txtApellidoPersonaje" /></Col>
+                                <Col className="ml-auto mr-auto" md="6">
+                                    <Input id="txtApellidoPersonaje" disabled={this.props.a} value={this.props.a ? this.state.casoAprobar.apellido : null} />
+                                </Col>
                             </Row>
                             <Row className="my-1">
                                 <Col className="ml-auto mr-auto text-dark font-weight-bold" md="6">Descripción:</Col>
-                                <Col className="ml-auto mr-auto" md="6"><textarea class="form-control" id="txtDescripcionPersonaje"></textarea ></Col>
+                                <Col className="ml-auto mr-auto" md="6">
+                                    <textarea class="form-control" id="txtDescripcionPersonaje" disabled={this.props.a} value={this.props.a ? this.state.casoAprobar.descripcion : null}></textarea >
+                                </Col>
                             </Row>
                             <Row className="my-1">
                                 <Col className="ml-auto mr-auto text-dark font-weight-bold" md="6">Rut:</Col>
-                                <Col className="ml-auto mr-auto" md="6"><Input id="txtRutPersonaje" /></Col>
+                                <Col className="ml-auto mr-auto" md="6">
+                                    <Input id="txtRutPersonaje" disabled={this.props.a} value={this.props.a ? this.state.casoAprobar.rut : null} />
+                                </Col>
                             </Row>
                             <Row className="my-1">
                                 <Col className="ml-auto mr-auto text-dark font-weight-bold" md="6">Nacionalidad:</Col>
-                                <Col className="ml-auto mr-auto" md="6"><Input id="txtNacionalidadPersonaje" /></Col>
+                                <Col className="ml-auto mr-auto" md="6">
+                                    <Input id="txtNacionalidadPersonaje" disabled={this.props.a} value={this.props.a ? this.state.casoAprobar.nacionalidad : null} />
+                                </Col>
                             </Row>
                             <Row className="my-1">
                                 <Col className="ml-auto mr-auto text-dark font-weight-bold" md="6">Cargo:</Col>
-                                <Col className="ml-auto mr-auto" md="6"><select class="custom-select" id="selectCargoPersonaje">
-                                    {this.state.cargos.map((cargo) => {
-                                        return (<option value={cargo.idCargo}>{cargo.titulo}</option>);
-                                    })}
-                                </select></Col>
+                                <Col className="ml-auto mr-auto" md="6">
+                                    <select class="custom-select" id="selectCargoPersonaje" disabled={this.props.a} value={this.props.a ? this.state.casoAprobar.cargoId : null}>
+                                        {this.state.cargos.map((cargo) => {
+                                            return (<option value={cargo.idCargo}>{cargo.titulo}</option>);
+                                        })}
+                                    </select>
+                                </Col>
                             </Row>
                             <Row className="my-1">
                                 <Col className="ml-auto mr-auto text-dark font-weight-bold" md="6">Imágen:</Col>
                                 {/* <Col className="ml-auto mr-auto" md="6"><input type="file" /></Col> */}
-                                <Col className="ml-auto mr-auto" md="6"><Input id="txtImagenPersonaje" /></Col>
+                                <Col className="ml-auto mr-auto" md="6">
+                                    <Input id="txtImagenPersonaje" disabled={this.props.a} value={this.props.a ? this.state.casoAprobar.imagenUrl : null} />
+                                </Col>
                             </Row>
                             <Row className="my-1">
                                 <Col className="text-dark font-weight-bold" md="2">Evidencias:</Col>
@@ -185,7 +201,7 @@ export default class ingresarCaso extends Component {
 
                                 <Col md="10">
                                     <Col className="float-right" md="2" ><Button onClick={this.handleAddRow.bind(this)}>+</Button></Col>
-                                    <Col className="float-right" md="2"><Button>-</Button></Col>
+                                    {/* <Col className="float-right" md="2"><Button>-</Button></Col> */}
                                 </Col>
                             </Row>
                             <Row className="my-1">
@@ -200,9 +216,12 @@ export default class ingresarCaso extends Component {
                                     />
                                 </Col>
                             </Row>
-                            <Row>
-                                <Col className="ml-auto mr-auto" md="6"><Button onClick={() => { this.validarFormulario(); }}>Guardar</Button></Col>
-                            </Row>
+                            {
+                                this.props.a ? <></> :
+                                    <Row>
+                                        <Col className="ml-auto mr-auto" md="6"><Button onClick={() => { this.validarFormulario(); }}>Guardar</Button></Col>
+                                    </Row>
+                            }
                             <Row>
                                 <Col className="ml-auto mr-auto" md="6"></Col>
                                 <Col className="ml-auto mr-auto" md="6"></Col>
