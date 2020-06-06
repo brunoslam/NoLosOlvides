@@ -146,47 +146,49 @@ export default class ingresarCaso extends Component {
                 <Container>
                     <Row>
                         <Col className="ml-auto mr-auto" md="6">
-                            <Row>
-                                <Col className="ml-auto mr-auto" md="6">*Nombre:</Col>
-                                <Col className="ml-auto mr-auto" md="6"><input id="txtNombrePersonaje" /></Col>
+                            <Row className="my-1">
+                                <Col className="ml-auto mr-auto text-dark font-weight-bold" md="6">*Nombre:</Col>
+                                <Col className="ml-auto mr-auto" md="6"><Input id="txtNombrePersonaje" /></Col>
                             </Row>
-                            <Row>
-                                <Col className="ml-auto mr-auto" md="6">*Apellido:</Col>
-                                <Col className="ml-auto mr-auto" md="6"><input id="txtApellidoPersonaje" /></Col>
+                            <Row className="my-1">
+                                <Col className="ml-auto mr-auto text-dark font-weight-bold" md="6">*Apellido:</Col>
+                                <Col className="ml-auto mr-auto" md="6"><Input id="txtApellidoPersonaje" /></Col>
                             </Row>
-                            <Row>
-                                <Col className="ml-auto mr-auto" md="6">Descripción:</Col>
-                                <Col className="ml-auto mr-auto" md="6"><textarea id="txtDescripcionPersonaje"></textarea ></Col>
+                            <Row className="my-1">
+                                <Col className="ml-auto mr-auto text-dark font-weight-bold" md="6">Descripción:</Col>
+                                <Col className="ml-auto mr-auto" md="6"><textarea class="form-control" id="txtDescripcionPersonaje"></textarea ></Col>
                             </Row>
-                            <Row>
-                                <Col className="ml-auto mr-auto" md="6">Rut:</Col>
-                                <Col className="ml-auto mr-auto" md="6"><input id="txtRutPersonaje" /></Col>
+                            <Row className="my-1">
+                                <Col className="ml-auto mr-auto text-dark font-weight-bold" md="6">Rut:</Col>
+                                <Col className="ml-auto mr-auto" md="6"><Input id="txtRutPersonaje" /></Col>
                             </Row>
-                            <Row>
-                                <Col className="ml-auto mr-auto" md="6">Nacionalidad:</Col>
-                                <Col className="ml-auto mr-auto" md="6"><input id="txtNacionalidadPersonaje" /></Col>
+                            <Row className="my-1">
+                                <Col className="ml-auto mr-auto text-dark font-weight-bold" md="6">Nacionalidad:</Col>
+                                <Col className="ml-auto mr-auto" md="6"><Input id="txtNacionalidadPersonaje" /></Col>
                             </Row>
-                            <Row>
-                                <Col className="ml-auto mr-auto" md="6">Cargo:</Col>
-                                <Col className="ml-auto mr-auto" md="6"><select id="selectCargoPersonaje">
+                            <Row className="my-1">
+                                <Col className="ml-auto mr-auto text-dark font-weight-bold" md="6">Cargo:</Col>
+                                <Col className="ml-auto mr-auto" md="6"><select class="custom-select" id="selectCargoPersonaje">
                                     {this.state.cargos.map((cargo) => {
                                         return (<option value={cargo.idCargo}>{cargo.titulo}</option>);
                                     })}
                                 </select></Col>
                             </Row>
-                            <Row>
-                                <Col className="ml-auto mr-auto" md="6">Imágen:</Col>
+                            <Row className="my-1">
+                                <Col className="ml-auto mr-auto text-dark font-weight-bold" md="6">Imágen:</Col>
                                 {/* <Col className="ml-auto mr-auto" md="6"><input type="file" /></Col> */}
-                                <Col className="ml-auto mr-auto" md="6"><input id="txtImagenPersonaje" /></Col>
+                                <Col className="ml-auto mr-auto" md="6"><Input id="txtImagenPersonaje" /></Col>
                             </Row>
-                            <Row>
-                                <Row><Col className="" md="2">Evidencias:</Col></Row>
-                                <Row>
-                                    <Col className="" md="2"><button onClick={this.handleAddRow.bind(this)}>+</button></Col>
-                                    <Col className="" md="2"><button>-</button></Col>
-                                </Row>
+                            <Row className="my-1">
+                                <Col className="text-dark font-weight-bold" md="2">Evidencias:</Col>
+
+
+                                <Col md="10">
+                                    <Col className="float-right" md="2" ><Button onClick={this.handleAddRow.bind(this)}>+</Button></Col>
+                                    <Col className="float-right" md="2"><Button>-</Button></Col>
+                                </Col>
                             </Row>
-                            <Row>
+                            <Row className="my-1">
                                 <Col className="ml-auto mr-auto" md="12">
                                     <ReactDataGrid
                                         columns={columns}

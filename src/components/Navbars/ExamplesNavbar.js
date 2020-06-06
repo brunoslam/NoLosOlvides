@@ -110,7 +110,7 @@ function ExamplesNavbar() {
               })
             }
             <NavItem>
-              <NavLink to="/index" tag={Link}>
+              <NavLink to="/indexDemo" tag={Link}>
                 <i className="nc-icon nc-layout-11" /> Components
               </NavLink>
             </NavItem>
