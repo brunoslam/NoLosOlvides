@@ -23,6 +23,7 @@
   },
   "scripts": {
     "start": "set NODE_ENV=development&&set HTTPS=true&&react-scripts start",
+    "build-dev": "set NODE_ENV=production&&set GENERATE_SOURCEMAP=true&&react-scripts build&&npm run build-rename",
     "build": "set NODE_ENV=production&&set GENERATE_SOURCEMAP=false&&react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
