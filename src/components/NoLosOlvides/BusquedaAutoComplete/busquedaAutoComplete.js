@@ -28,10 +28,13 @@ export default class busquedaAutoComplete extends Component {
 
         this.state = {
             personajes: [],
-            autocompleteValue: { event: null, value: null }
+            autocompleteValue: { event: null, value: null },
+            autocompleteInputValue: null,
+            busquedaNoEncontrada: false
         };
         this.derivarPerfil.bind(this);
         this.setAutocompleteValue.bind(this);
+        this.setAutocompleteInputValue.bind(this);
     }
 
     async componentWillMount() {
@@ -41,16 +44,27 @@ export default class busquedaAutoComplete extends Component {
     setAutocompleteValue(event, newValue) {
         this.setState({ autocompleteValue: { event: event, value: newValue } });
     }
+    setAutocompleteInputValue(event, newValue) {
+        this.setState({ autocompleteInputValue: newValue });
+    }
     derivarPerfil(xd, asd) {
-        var resultados = this.state.personajes.filter((p) => {
-            return `${p.nombre} ${p.apellido}` == this.state.autocompleteValue.value
-        });
+        if ((!this.state.autocompleteValue.value && !this.state.autocompleteInputValue) || this.state.autocompleteValue.value == "") {
+            alert("Debes ingresar un valor");
+        } else {
+            var resultados = this.state.personajes.filter((p) => {
+                return `${p.nombre} ${p.apellido}` == this.state.autocompleteValue.value || `${p.nombre} ${p.apellido}` == this.state.autocompleteInputValue
+            });
 
-        if (resultados.length > 0) {
-            sessionStorage.setItem("asd", resultados[0].idPersonaje);
-            window.location.href = "/personaje";
+            if (resultados.length > 0) {
+                this.setState({ busquedaNoEncontrada: false });
+                sessionStorage.setItem("asd", resultados[0].idPersonaje);
+                window.location.href = "/personaje";
+            } else {
+                this.setState({ busquedaNoEncontrada: true });
+            }
         }
     }
+
 
     render() {
         return (
@@ -64,9 +78,9 @@ export default class busquedaAutoComplete extends Component {
                             renderInput={(params) => (
                                 <TextField {...params} label="Ingresa un nombre" margin="normal" variant="outlined" />
                             )}
-                            // onInputChange={(event, newInputValue) => {
-                            //     this.derivarPerfil(event, newInputValue);
-                            // }}
+                            onInputChange={(event, newInputValue) => {
+                                this.setAutocompleteInputValue(event, newInputValue);
+                            }}
                             value={this.state.autocompleteValue.value}
                             onChange={(event, newValue) => {
                                 this.setAutocompleteValue(event, newValue);
@@ -94,9 +108,21 @@ export default class busquedaAutoComplete extends Component {
                 </Row>
                 <Row>
                     <Col xs={{ size: 8, offset: 4 }} sm={{ size: 8, offset: 4 }} md={{ size: 8, offset: 4 }}>
-                        <Button onClick={(e) => { this.derivarPerfil(); }}>Buscar</Button>
+                        <Button onClick={(e) => {
+                            e.preventDefault();
+                            this.derivarPerfil();
+                        }}>Buscar</Button>
                     </Col>
                 </Row>
+                {
+                    this.state.busquedaNoEncontrada ?
+                        <Row>
+                            <Col>
+                                Búsqueda no arrojó resultados, prueba con las sugerencias o <a href="/#/ingresar" className="font-weight-bold">ingresa un caso</a>
+                            </Col>
+                        </Row> : <></>
+                }
+
             </Container>
         )
     }
