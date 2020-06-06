@@ -8,7 +8,11 @@ export default class Personaje {
     constructor() {
 
     }
-
+    static async getPersonajes() {
+        var response = await (await fetch(`${process.env.NODE_ENV == "development" ? NoLosOlvidesInfo.urlApi : NoLosOlvidesInfo.urlApiProd}/api/Personajes`));
+        var json = await response.json();
+        return json;
+    }
 
     static async getPersonajePorId(idPersonajeBuscar) {
         var response = await (await fetch(`${process.env.NODE_ENV == "development" ? NoLosOlvidesInfo.urlApi : NoLosOlvidesInfo.urlApiProd}/api/Personajes/${idPersonajeBuscar}`));

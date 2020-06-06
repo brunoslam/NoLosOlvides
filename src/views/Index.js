@@ -42,8 +42,21 @@ import SectionExamples from "views/index-sections/SectionExamples.js";
 import SectionDownload from "views/index-sections/SectionDownload.js";
 //
 import BusquedaAutoComplete from "../components/NoLosOlvides/busquedaAutoComplete";
-
-
+import TemplateNoLosOlvides from "views/template/templateNoLosOlvides";
+import {
+    Button,
+    Label,
+    FormGroup,
+    Input,
+    NavItem,
+    NavLink,
+    Nav,
+    TabContent,
+    TabPane,
+    Container,
+    Row,
+    Col
+} from "reactstrap";
 
 function Index() {
     document.documentElement.classList.remove("nav-open");
@@ -55,12 +68,19 @@ function Index() {
     });
     return (
         <>
-            {/* <IndexNavbar /> */}
-            <ExamplesNavbar />
-            {/* <IndexHeader /> */}
-            <div className="main">
-                <BusquedaAutoComplete />
-                {/*  */}
+            <TemplateNoLosOlvides>
+                <Container>
+                    <Row>
+                        <Col className="ml-auto mr-auto" md="6">
+                            <BusquedaAutoComplete />
+                        </Col>
+                    </Row>
+                </Container>
+
+
+                {/* <ExamplesNavbar />
+                <div className="main">
+                    
                 <SectionButtons />
                 <SectionNavbars />
                 <SectionNavigation />
@@ -75,7 +95,8 @@ function Index() {
                 <SectionExamples />
                 <SectionDownload />
                 <DemoFooter />
-            </div>
+                </div> */}
+            </TemplateNoLosOlvides>
         </>
     );
 }

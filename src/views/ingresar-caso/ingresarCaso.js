@@ -14,6 +14,7 @@ import CloseIcon from '@material-ui/icons/Close';
 import ReactDataGrid from 'react-data-grid';
 import Categoria from "model/categoria";
 import Cargos from "model/cargos";
+import Personaje from "model/personaje";
 import {
     Button,
     Label,
