@@ -72,6 +72,13 @@ function Index() {
                 <Container>
                     <Row>
                         <Col className="ml-auto mr-auto" md="6">
+                            <p class="text-justify">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin diam eros, rutrum eu libero in, dictum tincidunt odio. Suspendisse ornare, nibh faucibus molestie auctor, quam augue eleifend mauris, sed aliquam metus metus in tortor. Donec vel varius dui, ac pharetra urna. Proin dictum at tortor in tincidunt. Phasellus feugiat scelerisque imperdiet. Morbi finibus cursus nisi, id lacinia enim. Praesent vitae urna sit amet risus viverra hendrerit ut at felis. Mauris egestas laoreet sapien. Nullam sit amet arcu nulla. Maecenas bibendum vitae nibh id molestie. Pellentesque maximus dolor at magna finibus laoreet. Suspendisse egestas gravida sapien, nec rhoncus risus placerat vel. Sed quis pellentesque ex.</p>
+                        </Col>
+                    </Row>
+                </Container>
+                <Container>
+                    <Row>
+                        <Col className="ml-auto mr-auto" md="6">
                             <BusquedaAutoComplete />
                         </Col>
                     </Row>
