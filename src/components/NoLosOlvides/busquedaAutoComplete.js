@@ -93,7 +93,7 @@ export default class busquedaAutoComplete extends Component {
                 /> */}
                 </Row>
                 <Row>
-                    <Col md={{ size: 8, offset: 4 }}>
+                    <Col xs={{ size: 8, offset: 4 }} sm={{ size: 8, offset: 4 }} md={{ size: 8, offset: 4 }}>
                         <Button onClick={(e) => { this.derivarPerfil(); }}>Buscar</Button>
                     </Col>
                 </Row>

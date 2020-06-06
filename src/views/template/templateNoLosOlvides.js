@@ -26,8 +26,6 @@ import { Button, Card, Form, Input, Container, Row, Col } from "reactstrap";
 
 // core components
 import ExamplesNavbar from "components/Navbars/ExamplesNavbar.js";
-import GridItem from "components/Grid/GridItem.js";
-import GridContainer from "components/Grid/GridContainer.js";
 
 // const theme = createMuiTheme();
 const theme = {
@@ -48,38 +46,63 @@ function TemplateNoLosOlvides(props) {
   });
   return (
     <>
-      <ThemeProvider theme={theme}>
+      {/* <ThemeProvider theme={theme}>
         <Box
           color="primary.main"
           bgcolor="background.paper"
           fontFamily="h6.fontFamily"
           fontSize={{ xs: 'h6.fontSize', sm: 'h4.fontSize', md: 'h3.fontSize' }}
           p={{ xs: 2, sm: 3, md: 4 }}
-        >
-          <ExamplesNavbar />
-          {/* <div
+        > */}
+
+      {/* <div
         className="page-header"
         style={{
           backgroundImage: "url(" + require("assets/img/login-image.jpg") + ")"
         }}
       > */}
-          {/* <div className="main"> */}
-          <GridContainer>
-            <GridItem xs={12} sm={12} md={12} justify="space-around">
-              {props.children}
-            </GridItem>
-          </GridContainer>
-          {/* <div className="filter" /> */}
-          <div className="footer register-footer text-center">
-            <h6>
-              © {new Date().getFullYear()}, made with{" "}
-              <i className="fa fa-heart heart" /> by Creative Tim
-              </h6>
-          </div>
-          {/* </div> */}
-          {/* </div> */}
-        </Box>
-      </ThemeProvider>
+      {/* <div className="main"> */}
+      <Container>
+        <Row>
+          <Col xs={12} sm={12} md={12} justify="space-around">
+            <ExamplesNavbar />
+          </Col>
+        </Row>
+        <Row>
+          <Col xs={12} sm={12} md={12} justify="space-around">
+            {props.children}
+          </Col>
+        </Row>
+      </Container>
+      {/* <Container>
+        <Row>
+          <Col xs={12} sm={12} md={12} justify="space-around">
+
+          </Col>
+        </Row>
+      </Container> */}
+
+      <div className="footer register-footer text-center text-dark">
+        <h6>© {new Date().getFullYear()}</h6>
+        {/* <h6>
+                    © {new Date().getFullYear()}, made with{" "}
+                    <i className="fa fa-heart heart" /> by Creative Tim
+                    </h6> */}
+      </div>
+      {/* <footer className="page-footer footer register-footer font-small blue pt-4">
+
+            <div className="container-fluid text-center text-md-left">
+
+              
+
+            </div>
+            <div className="footer-copyright text-center py-3">© 2020 Copyright:
+            <a href="https://mdbootstrap.com/"> MDBootstrap.com</a>
+            </div>
+
+          </footer> */}
+      {/* </Box>
+      </ThemeProvider> */}
     </>
   );
 }
