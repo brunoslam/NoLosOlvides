@@ -93,7 +93,7 @@ function ExamplesNavbar() {
           </button>
         </div>
         <Collapse
-          className="justify-content-end"
+          className="justify-content-center"
           navbar
           isOpen={navbarCollapse}
         >
@@ -109,17 +109,17 @@ function ExamplesNavbar() {
                 )
               })
             }
-            <NavItem>
+            {/* <NavItem>
               <NavLink to="/indexDemo" tag={Link}>
                 <i className="nc-icon nc-layout-11" /> Components
               </NavLink>
-            </NavItem>
+            </NavItem> */}
             <NavItem>
               <NavLink
                 data-placement="bottom"
-                href="https://twitter.com/CreativeTim?ref=creativetim"
+                href="https://twitter.com/NoLosOlvides"
                 target="_blank"
-                title="Follow us on Twitter"
+                title="Síguenos en Twitter"
               >
                 <i className="fa fa-twitter" />
                 <p className="d-lg-none">Twitter</p>
@@ -128,9 +128,9 @@ function ExamplesNavbar() {
             <NavItem>
               <NavLink
                 data-placement="bottom"
-                href="https://www.facebook.com/CreativeTim?ref=creativetim"
+                href="https://www.facebook.com/No-Los-Olvides-101381898282342"
                 target="_blank"
-                title="Like us on Facebook"
+                title="Síguenos en Facebook"
               >
                 <i className="fa fa-facebook-square" />
                 <p className="d-lg-none">Facebook</p>
@@ -139,9 +139,9 @@ function ExamplesNavbar() {
             <NavItem>
               <NavLink
                 data-placement="bottom"
-                href="https://www.instagram.com/CreativeTimOfficial?ref=creativetim"
+                href="https://www.instagram.com/nolosolvides.cl"
                 target="_blank"
-                title="Follow us on Instagram"
+                title="Síguenos en Instagram"
               >
                 <i className="fa fa-instagram" />
                 <p className="d-lg-none">Instagram</p>
@@ -150,12 +150,12 @@ function ExamplesNavbar() {
             <NavItem>
               <NavLink
                 data-placement="bottom"
-                href="https://www.github.com/CreativeTimOfficial?ref=creativetim"
+                href="mailto:nolosolvides.cl@gmail.com"
                 target="_blank"
-                title="Star on GitHub"
+                title="Comúnicate vía email"
               >
-                <i className="fa fa-github" />
-                <p className="d-lg-none">GitHub</p>
+                <i className="fa fa-envelope" />
+                <p className="d-lg-none">Email</p>
               </NavLink>
             </NavItem>
           </Nav>

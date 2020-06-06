@@ -7,25 +7,25 @@ const seccionesPagina = [
     {
         Title: "Buscador",
         Url: "/busqueda-avanzada",
-        Icon: "nc-icon nc-layout-11",
+        Icon: "nc-icon nc-zoom-split nc-layout-11",
         Component: BuscadorAvanzado
     },
     {
         Title: "Los más buscados",
         Url: "/los-mas-buscados",
-        Icon: "",
+        Icon: "nc-icon nc-chart-bar-32",
         Component: Ranking
     },
     {
         Title: "Categorías",
         Url: "/categorias",
-        Icon: "",
+        Icon: "nc-icon nc-tag-content",
         Component: Categorias
     },
     {
         Title: "Ingresar",
         Url: "/ingresar",
-        Icon: "",
+        Icon: "nc-icon nc-paper",
         Component: IngresarCaso
     }
 ]
