@@ -33,6 +33,8 @@ import ProfilePage from "views/examples/ProfilePage.js";
 import RegisterPage from "views/examples/RegisterPage.js";
 // others
 import Secciones from "variables/secciones";
+import Login from "views/staff/login/login";
+import VerPersonaje from "views/personaje/ver/verpersonaje";
 
 ReactDOM.render(
   <BrowserRouter>
@@ -54,6 +56,14 @@ ReactDOM.render(
       <Route
         path="/register-page"
         render={props => <RegisterPage {...props} />}
+      />
+      <Route
+        path="/staff/login"
+        render={props => <Login {...props} />}
+      />
+      <Route
+        path="/personaje"
+        render={props => <VerPersonaje {...props} />}
       />
 
       {
