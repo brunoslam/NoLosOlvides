@@ -3,24 +3,46 @@ import TemplateNoLosOlvides from "views/template/templateNoLosOlvides";
 import { Button, Card, Form, Input, Container, Row, Col } from "reactstrap";
 import NoLosOlvidesInfo from "variables/NoLosOlvidesInfo";
 export default function Login() {
+    const [loginState, setLoginState] = React.useState({});
+
+    if (sessionStorage.getItem("loginState") == "true") {
+        window.location.href = "/#/staff/aprobacion";
+    }
 
     async function IniciarSesion() {
-        alert("xd");
-
-        var asd = sha256("Password00");
+        // var asd = sha256("Password00");
 
         // var response = await(await fetch(`${process.env.NODE_ENV == "development" ? NoLosOlvidesInfo.urlApi : NoLosOlvidesInfo.urlApiProd}/api/Staff`));
+        var userName = document.getElementById("txtUsuario").value;
+        var passWord = document.getElementById("txtContrasena").value;
+        if (!userName || !passWord) {
+            alert("Debes completar todos los campos");
+            return;
+        }
+        try {
+            var data = { username: userName, password: passWord };
+            var response = await (await fetch(`${process.env.NODE_ENV == "development" ? NoLosOlvidesInfo.urlApi : NoLosOlvidesInfo.urlApiProd}/api/Staff/authenticate`, {
+                method: 'POST', // or 'PUT'
+                body: JSON.stringify(data), // data can be `string` or {object}!
+                // mode: 'no-cors',
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            }));
+            var json = await response.json();
 
-        var data = { username: "bpalma" };
-        var response = await(await fetch(`${process.env.NODE_ENV == "development" ? NoLosOlvidesInfo.urlApi : NoLosOlvidesInfo.urlApiProd}/api/Staff`, {
-            method: 'POST', // or 'PUT'
-            body: JSON.stringify(data), // data can be `string` or {object}!
-            mode: 'no-cors',
-            headers: {
-                'Content-Type': 'application/json'
+            if (json.message) {
+                alert("Usuario o contraseña incorrecta");
+            } else {
+                alert("Haz iniciado correctamente");
+                sessionStorage.setItem("loginState", "true");
+                window.location.href = "/#/staff/aprobacion";
             }
-        }));
-        var json = await response.json();
+
+
+        } catch (error) {
+            alert("Error al iniciar sesión, intenta más tarde");
+        }
 
     }
 
@@ -76,7 +98,7 @@ export default function Login() {
                                 <label>Usuario</label>
                                 <Input placeholder="Email" type="text" id="txtUsuario" />
                                 <label>Contraseña</label>
-                                <Input placeholder="Contraseña" type="password" id="txtContraseña" />
+                                <Input placeholder="Contraseña" type="password" id="txtContrasena" />
                                 <Button block className="btn-round" color="danger" onClick={e => { e.preventDefault(); IniciarSesion(); }}>
                                     Iniciar Sesión
                                 </Button>

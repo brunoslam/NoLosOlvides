@@ -4,6 +4,11 @@ import { Table, Button } from 'reactstrap';
 import Personaje from "model/personaje";
 export default function TablaAprobacion() {
     const [personajesPendientes, setPersonajesPendientes] = React.useState([]);
+
+    if (sessionStorage.getItem("loginState") != "true") {
+        window.location.href = "/#/index";
+    }
+
     React.useEffect(() => {
 
 
@@ -19,6 +24,7 @@ export default function TablaAprobacion() {
         window.location.href = "/#/staff/aprobar-caso";
     }
     return (
+        sessionStorage.getItem("loginState") != "true" ? <></> :
         <TemplateNoLosOlvides>
             <Table>
                 <thead>
