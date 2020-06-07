@@ -2,10 +2,16 @@ import React from 'react'
 import Ingresar from "views/ingresar-caso/ingresarCaso";
 import { Button, Container, Row, Col } from 'reactstrap';
 export default function Aprobacion() {
+    if (sessionStorage.getItem("loginState") != "true") {
+        window.location.href = "/#/index";
+    }
+
+
     function gestionar(estado) {
 
     }
     return (
+        sessionStorage.getItem("loginState") != "true" ? <></> :
         <>
             <Container>
                 <Ingresar a={true} />

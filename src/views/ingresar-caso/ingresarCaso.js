@@ -1,6 +1,7 @@
 // import React, { useState } from 'react';
 import React, { Component } from 'react'
 import TemplateNoLosOlvides from "views/template/templateNoLosOlvides";
+import NoLosOlvidesInfo from "variables/NoLosOlvidesInfo";
 import { makeStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -41,18 +42,21 @@ const columns = [
 export default class ingresarCaso extends Component {
     constructor(props) {
         super(props);
-        debugger;
         this.state = {
             rows: [
             ],
             categorias: [],
             cargos: [],
-            casoAprobar: props.a ? JSON.parse(sessionStorage.getItem("xd")) : null
+            casoAprobar: props.a ? JSON.parse(sessionStorage.getItem("xd")) : null,
+            evidencias: [],
+            contadorId: 0
         };
         this.onGridRowsUpdated.bind(this);
         this.getCellActions.bind(this);
         this.validarFormulario.bind(this);
         this.insertarPersonaje.bind(this);
+        this.handleChangeInputEvidencia.bind(this);
+        this.handleDeleteRow.bind(this);
     }
 
     async componentWillMount() {
@@ -62,20 +66,51 @@ export default class ingresarCaso extends Component {
     }
 
     handleAddRow() {
-        // alert(this);
-        debugger;
-        var newData = this.state.rows;
-        var nuevoIndice = this.state.rows.length == 0 ? 1 : this.state.rows.slice(-1).pop().id + 1
-        newData.push(
-            {
-                id: nuevoIndice,
-                titulo: null,
-                descripcion: null,
-                fecha: null,
-                link: null,
+        // var newData = this.state.rows;
+        // var nuevoIndice = this.state.rows.length == 0 ? 1 : this.state.rows.slice(-1).pop().id + 1
+        // newData.push(
+        //     {
+        //         id: nuevoIndice,
+        //         titulo: null,
+        //         descripcion: null,
+        //         fecha: null,
+        //         link: null,
+        //     }
+        // );
+        // this.setState({ rows: newData });
+
+        var asd = this.state.evidencias;
+        var id = this.state.contadorId + 1;
+        asd.push({
+            id: id,
+            titulo: null,
+            descripcion: null,
+            fecha: null,
+            link: null,
+        });
+
+        this.setState({ evidencias: asd, contadorId: id });
+
+    }
+
+    handleChangeInputEvidencia(e, evidenciaChange) {
+        var arr = this.state.evidencias;
+        arr.map((evidencia) => {
+            if (evidencia.id == evidenciaChange.id) {
+                evidencia[e.target.name] = e.target.value;
             }
-        );
-        this.setState({ rows: newData });
+        });
+        this.setState({ evidencias: arr });
+    }
+
+    handleDeleteRow(evidenciaDelete) {
+        // eslint-disable-next-line no-restricted-globals
+        if (confirm("¿Estás seguro de eliminar esta fila?")) {
+            var arr = this.state.evidencias.filter((evidencia) => {
+                return evidencia.id !== evidenciaDelete.id
+            });
+            this.setState({ evidencias: arr });
+        }
     }
     getCellActions = (column, row) => {
         const cellActions = [
@@ -101,7 +136,7 @@ export default class ingresarCaso extends Component {
         var rut = (document.getElementById("txtRutPersonaje")).value;
         var nacionalidad = (document.getElementById("txtNacionalidadPersonaje")).value;
         var cargo = (document.getElementById("selectCargoPersonaje")).value;
-        var imagen = (document.getElementById("txtImagenPersonaje")).value;
+        var imagenUrl = (document.getElementById("txtImagenPersonaje")).value;
 
 
         if (!nombre || !apellido || !cargo) {
@@ -109,11 +144,11 @@ export default class ingresarCaso extends Component {
             flagFormValido = false;
         }
 
-        if (this.state.rows.length == 0) {
+        if (this.state.evidencias.length == 0) {
             alert("Debes ingresar al menos una evidencia");
             flagFormValido = false;
         } else {
-            this.state.rows.map((row) => {
+            this.state.evidencias.map((row) => {
                 if (!row.titulo || !row.descripcion || !row.fecha || !row.link) {
                     alert("Debes compeltar todos los datos de la tabla");
                     flagFormValido = false;
@@ -122,14 +157,46 @@ export default class ingresarCaso extends Component {
         }
 
         if (flagFormValido) {
-            this.insertarPersonaje();
+            var personaje = {
+                "nombre": nombre,
+                "apellido": apellido,
+                "descripcion": descripcion,
+                "rut": rut,
+                "nacionalidad": nacionalidad,
+                "idCargo": parseInt(cargo),
+                "imagenUrl": imagenUrl,
+                "idEstadoAprobacion": 1
+            }
+            this.insertarPersonaje(personaje);
+
         }
 
 
     }
 
-    async insertarPersonaje() {
-        alert(this);
+    async insertarPersonaje(personaje) {
+
+        try {
+            var response = await (await fetch(`${process.env.NODE_ENV == "development" ? NoLosOlvidesInfo.urlApi : NoLosOlvidesInfo.urlApiProd}/api/Personajes`, {
+                method: 'POST', // or 'PUT'
+                body: JSON.stringify(personaje), // data can be `string` or {object}!
+                // mode: 'no-cors',
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            }));
+            var json = await response.json();
+
+
+            if (json.message) {
+                alert(json.message)
+            } else {
+                alert("Se ha guardado correctamente");
+                window.location.reload();
+            }
+        } catch (error) {
+            alert("Se ha producido un error al ingresar la información intenta más tarde");
+        }
     }
 
     onGridRowsUpdated = ({ fromRow, toRow, updated }) => {
@@ -141,6 +208,9 @@ export default class ingresarCaso extends Component {
             return { rows };
         });
     };
+    isOdd(num) {
+        return num % 2;
+    }
 
     render() {
         return (
@@ -199,12 +269,60 @@ export default class ingresarCaso extends Component {
                                 <Col className="text-dark font-weight-bold" md="2">Evidencias:</Col>
 
 
+                            </Row>
+
+                            {
+                                this.state.evidencias.map((evidencia, i) => {
+                                    return (
+                                        <Row className="border-bottom border-secondary rounded-lg" style={{ backgroundColor: this.isOdd(i) ? "" : "#66666624" }}>
+                                            <Col md="10">
+                                                <Row className="my-3">
+                                                    <Col className="font-weight-bold">Evidencia #{i + 1}
+                                                    </Col>
+                                                    <Col>
+                                                    </Col>
+                                                </Row>
+                                                <Row className="my-3">
+                                                    <Col>Título</Col>
+                                                    <Col>
+                                                        <Input value={evidencia.titulo} name="titulo" onChange={(e) => { this.handleChangeInputEvidencia(e, evidencia); }} />
+                                                    </Col>
+                                                </Row>
+                                                <Row className="my-3">
+                                                    <Col>Descripción</Col>
+                                                    <Col>
+                                                        <textarea className="form-control" value={evidencia.descripcion} name="descripcion" onChange={(e) => { this.handleChangeInputEvidencia(e, evidencia); }}></textarea>
+                                                    </Col>
+                                                </Row>
+                                                <Row className="my-3">
+                                                    <Col>Fecha</Col>
+                                                    <Col>
+                                                        <Input type="date" value={evidencia.fecha} name="fecha" onChange={(e) => { this.handleChangeInputEvidencia(e, evidencia); }} />
+                                                    </Col>
+                                                </Row>
+                                                <Row className="my-3">
+                                                    <Col>Link</Col>
+                                                    <Col>
+                                                        <Input value={evidencia.link} name="link" onChange={(e) => { this.handleChangeInputEvidencia(e, evidencia); }} />
+                                                    </Col>
+                                                </Row>
+                                            </Col>
+                                            <Col md="2" className="align-self-center" style={{ margin: "auto" }}>
+                                                <Button className="btn btn-danger btn-sm" onClick={() => { this.handleDeleteRow(evidencia); }}>Eliminar evidencia</Button>
+                                            </Col>
+                                        </Row>
+                                    );
+                                })
+                            }
+                            <Row>
+
                                 <Col md="10">
-                                    <Col className="float-right" md="2" ><Button onClick={this.handleAddRow.bind(this)}>+</Button></Col>
+                                    <Col className="float-right" md="2" ><Button className="btn btn-sm" onClick={this.handleAddRow.bind(this)}>Agregar evidencia</Button></Col>
                                     {/* <Col className="float-right" md="2"><Button>-</Button></Col> */}
                                 </Col>
                             </Row>
-                            <Row className="my-1">
+
+                            {/* <Row className="my-1">
                                 <Col className="ml-auto mr-auto" md="12">
                                     <ReactDataGrid
                                         columns={columns}
@@ -215,11 +333,11 @@ export default class ingresarCaso extends Component {
                                         getCellActions={this.getCellActions}
                                     />
                                 </Col>
-                            </Row>
+                            </Row> */}
                             {
                                 this.props.a ? <></> :
-                                    <Row>
-                                        <Col className="ml-auto mr-auto" md="6"><Button onClick={() => { this.validarFormulario(); }}>Guardar</Button></Col>
+                                    <Row className="my-5">
+                                        <Col className="ml-auto mr-auto " md="6"><Button className="btn btn-lg btn-block" onClick={() => { this.validarFormulario(); }}>Guardar</Button></Col>
                                     </Row>
                             }
                             <Row>
