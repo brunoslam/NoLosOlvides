@@ -11,11 +11,15 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 
+import TextField from '@material-ui/core/TextField';
+import Autocomplete from '@material-ui/lab/Autocomplete';
+
 import CloseIcon from '@material-ui/icons/Close';
 import ReactDataGrid from 'react-data-grid';
 import Categoria from "model/categoria";
 import Cargos from "model/cargos";
 import Personaje from "model/personaje";
+import BusquedaAutoCompleteCategoria from "components/NoLosOlvides/busquedaAutoCompleteCategoria";
 import {
     Button,
     Label,
@@ -256,6 +260,27 @@ export default class ingresarCaso extends Component {
                                             return (<option value={cargo.idCargo}>{cargo.titulo}</option>);
                                         })}
                                     </select>
+                                </Col>
+                            </Row>
+                            <Row className="my-1">
+                                <Col className="ml-auto mr-auto text-dark font-weight-bold" md="6">Categorias:</Col>
+                                <Col className="ml-auto mr-auto" md="6">
+                                    <Autocomplete
+                                        multiple
+                                        id="tags-outlined"
+                                        options={this.state.categorias}
+                                        getOptionLabel={(categoria) => categoria.titulo}
+                                        // defaultValue={[top100Films[2]]}
+                                        filterSelectedOptions
+                                        renderInput={(params) => (
+                                            <TextField
+                                                {...params}
+                                                variant="outlined"
+                                                // label="filterSelectedOptions"
+                                                // placeholder="Favorites"
+                                            />
+                                        )}
+                                    />
                                 </Col>
                             </Row>
                             <Row className="my-1">
