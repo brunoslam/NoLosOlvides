@@ -5,6 +5,12 @@ import Ranking from "views/ranking/ranking";
 import BuscadorAvanzado from "views/buscador-avanzado/buscadorAvanzado";
 const seccionesPagina = [
     {
+        Title: "Ingresar",
+        Url: "/ingresar",
+        Icon: "nc-icon nc-paper",
+        Component: IngresarCaso
+    },
+    {
         Title: "Buscador",
         Url: "/busqueda-avanzada",
         Icon: "nc-icon nc-zoom-split nc-layout-11",
@@ -21,13 +27,8 @@ const seccionesPagina = [
         Url: "/categorias",
         Icon: "nc-icon nc-tag-content",
         Component: Categorias
-    },
-    {
-        Title: "Ingresar",
-        Url: "/ingresar",
-        Icon: "nc-icon nc-paper",
-        Component: IngresarCaso
     }
+
 ]
 
 export default seccionesPagina;

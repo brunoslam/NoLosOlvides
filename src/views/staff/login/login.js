@@ -34,7 +34,7 @@ export default function Login() {
             if (json.message) {
                 alert("Usuario o contraseña incorrecta");
             } else {
-                alert("Haz iniciado correctamente");
+                alert("Iniciaste sesión correctamente");
                 sessionStorage.setItem("loginState", "true");
                 window.location.href = "/#/staff/aprobacion";
             }
