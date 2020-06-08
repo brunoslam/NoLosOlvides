@@ -4,11 +4,20 @@ import { Button, Card, Form, Input, Container, Row, Col } from "reactstrap";
 import NoLosOlvidesInfo from "variables/NoLosOlvidesInfo";
 export default function Login() {
     const [loginState, setLoginState] = React.useState({});
+    const [isLoading, setIsLoading] = React.useState(true);
 
-    if (sessionStorage.getItem("loginState") == "true") {
-        window.location.href = "/#/staff/aprobacion";
-    }
+    // if (sessionStorage.getItem("loginState") == "true") {
+    //     window.location.href = "/#/staff/aprobacion";
+    // }
 
+    React.useEffect(() => {
+        debugger;
+        if (sessionStorage.getItem("loginState") == "true") {
+            window.location.href = "/#/staff/aprobacion";
+        } else {
+            setIsLoading(false);
+        }
+    });
     async function IniciarSesion() {
         // var asd = sha256("Password00");
 
@@ -36,7 +45,7 @@ export default function Login() {
             } else {
                 alert("Iniciaste sesión correctamente");
                 sessionStorage.setItem("loginState", "true");
-                window.location.href = "/#/staff/aprobacion";
+                window.location.reload();
             }
 
 
@@ -63,12 +72,14 @@ export default function Login() {
 
     return (
         <TemplateNoLosOlvides>
-            <Container>
-                <Row>
-                    <Col className="ml-auto mr-auto" lg="4">
-                        <Card className="card-register ml-auto mr-auto">
-                            <h3 className="title mx-auto">Inicia Sesión</h3>
-                            {/* <div className="social-line text-center">
+            {
+                isLoading ? <></> :
+                    <Container>
+                        <Row>
+                            <Col className="ml-auto mr-auto" lg="4">
+                                <Card className="card-register ml-auto mr-auto">
+                                    <h3 className="title mx-auto">Inicia Sesión</h3>
+                                    {/* <div className="social-line text-center">
                                 <Button
                                     className="btn-neutral btn-just-icon mr-1"
                                     color="facebook"
@@ -94,30 +105,31 @@ export default function Login() {
                                     <i className="fa fa-twitter" />
                                 </Button>
                             </div> */}
-                            <Form className="register-form">
-                                <label>Usuario</label>
-                                <Input placeholder="Email" type="text" id="txtUsuario" />
-                                <label>Contraseña</label>
-                                <Input placeholder="Contraseña" type="password" id="txtContrasena" />
-                                <Button block className="btn-round" color="danger" onClick={e => { e.preventDefault(); IniciarSesion(); }}>
-                                    Iniciar Sesión
+                                    <Form className="register-form">
+                                        <label>Usuario</label>
+                                        <Input placeholder="Email" type="text" id="txtUsuario" />
+                                        <label>Contraseña</label>
+                                        <Input placeholder="Contraseña" type="password" id="txtContrasena" />
+                                        <Button block className="btn-round" color="danger" onClick={e => { e.preventDefault(); IniciarSesion(); }}>
+                                            Iniciar Sesión
                                 </Button>
-                            </Form>
-                            <div className="forgot">
-                                <Button
-                                    className="btn-link"
-                                    color="danger"
-                                    href="#pablo"
-                                    onClick={e => e.preventDefault()}
-                                    disabled={true}
-                                >
-                                    ¿Olvidaste tu contraseña?
+                                    </Form>
+                                    <div className="forgot">
+                                        <Button
+                                            className="btn-link"
+                                            color="danger"
+                                            href="#pablo"
+                                            onClick={e => e.preventDefault()}
+                                            disabled={true}
+                                        >
+                                            ¿Olvidaste tu contraseña?
                                 </Button>
-                            </div>
-                        </Card>
-                    </Col>
-                </Row>
-            </Container>
+                                    </div>
+                                </Card>
+                            </Col>
+                        </Row>
+                    </Container>
+            }
         </TemplateNoLosOlvides>
     )
 }

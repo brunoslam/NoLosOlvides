@@ -35,6 +35,7 @@ import RegisterPage from "views/examples/RegisterPage.js";
 // others
 import Secciones from "variables/secciones";
 import Login from "views/staff/login/login";
+import Logout from "views/staff/login/logout";
 import VerPersonaje from "views/personaje/ver/verpersonaje";
 import TablaAprobacion from "views/staff/aprobacion/tablaAprobacion";
 import AprobarCaso from "views/staff/aprobacion/aprobacion";
@@ -68,6 +69,10 @@ ReactDOM.render(
         render={props => <Login {...props} />}
       />
       <Route
+        path="/staff/logout"
+        render={props => <Logout {...props} />}
+      />
+      <Route
         path="/staff/aprobacion"
         render={props => <TablaAprobacion {...props} />}
       />
@@ -82,14 +87,16 @@ ReactDOM.render(
 
       {
         Secciones.map((seccion) => {
-          return (
-            <Route
-              path={seccion.Url}
-              render={props => <seccion.Component {...props} />}
-            />
+          if (!seccion.notRegister) {
+            return (
+              <Route
+                path={seccion.Url}
+                render={props => <seccion.Component {...props} />}
+              />
 
-          )
+            )
 
+          }
         })
       }
 

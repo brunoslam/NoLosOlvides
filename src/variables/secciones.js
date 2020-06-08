@@ -3,6 +3,8 @@ import IngresarCaso from "views/ingresar-caso/ingresarCaso";
 import Categorias from "views/categorias/categorias";
 import Ranking from "views/ranking/ranking";
 import BuscadorAvanzado from "views/buscador-avanzado/buscadorAvanzado";
+import Login from "views/staff/login/login";
+import Logout from "views/staff/login/logout";
 const seccionesPagina = [
     {
         Title: "Ingresar",
@@ -27,6 +29,13 @@ const seccionesPagina = [
         Url: "/categorias",
         Icon: "nc-icon nc-tag-content",
         Component: Categorias
+    },
+    {
+        Title: sessionStorage.getItem("loginState") == "true" ? "Cerrar sesión" : "Iniciar sesión",
+        Url: sessionStorage.getItem("loginState") == "true" ? "/staff/logout" : "/staff/login",
+        Icon: sessionStorage.getItem("loginState") == "true" ? "nc-icon nc-lock-circle-open" : "nc-icon nc-key-25",
+        Component: Login,
+        notRegister: true
     }
 
 ]
