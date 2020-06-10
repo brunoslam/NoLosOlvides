@@ -71,11 +71,12 @@ function ExamplesNavbar() {
     >
       <Container>
         <div className="navbar-translate">
+        {/* <img style={{ width: "100%" }} src={require("assets/img/nolosolvides/logonolosolvides.png")} /> */}
           <NavbarBrand
             data-placement="bottom"
             to="/index"
             // target="_blank"
-            title="Coded by Creative Tim"
+            title="No Los olvides"
             tag={Link}
           >
             {NoLosOlvidesInfo.title}
