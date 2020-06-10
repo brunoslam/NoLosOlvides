@@ -25,6 +25,8 @@ import * as serviceWorker from './serviceWorker';
 import "assets/css/bootstrap.min.css";
 import "assets/scss/paper-kit.scss";
 import "assets/demo/demo.css";
+import "assets/css/custom.css";
+
 // pages
 import Index from "views/Index.js";
 import IndexDemo from "views/IndexDemo.js";

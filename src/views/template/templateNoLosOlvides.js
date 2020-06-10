@@ -62,7 +62,7 @@ function TemplateNoLosOlvides(props) {
         }}
       > */}
       {/* <div className="main"> */}
-      <Container>
+      <Container id="containerPage">
         <Row>
           <Col xs={12} sm={12} md={12} justify="space-around">
             <ExamplesNavbar />
@@ -81,14 +81,16 @@ function TemplateNoLosOlvides(props) {
           </Col>
         </Row>
       </Container> */}
-
-      <div className="footer register-footer text-center text-dark">
-        <h6>© {new Date().getFullYear()}</h6>
-        {/* <h6>
+      <footer class="footer">
+        <div class="container">
+          <span class="text-muted" style={{float: "right"}}>© {new Date().getFullYear()}, No Los Olvides
+            {/* <h6>
                     © {new Date().getFullYear()}, made with{" "}
                     <i className="fa fa-heart heart" /> by Creative Tim
-                    </h6> */}
-      </div>
+                    </h6> */}</span>
+        </div>
+      </footer>
+
       {/* <footer className="page-footer footer register-footer font-small blue pt-4">
 
             <div className="container-fluid text-center text-md-left">

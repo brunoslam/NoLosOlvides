@@ -76,7 +76,7 @@ function ExamplesNavbar() {
             data-placement="bottom"
             to="/index"
             // target="_blank"
-            title="No Los olvides"
+            title="No Los Olvides"
             tag={Link}
           >
             {NoLosOlvidesInfo.title}
