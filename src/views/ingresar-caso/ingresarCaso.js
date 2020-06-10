@@ -19,6 +19,8 @@ import ReactDataGrid from 'react-data-grid';
 import Categoria from "model/categoria";
 import Cargos from "model/cargos";
 import Personaje from "model/personaje";
+import { MentionsInput, Mention } from 'react-mentions'
+
 import BusquedaAutoCompleteCategoria from "components/NoLosOlvides/busquedaAutoCompleteCategoria";
 import {
     Button,
@@ -53,7 +55,8 @@ export default class ingresarCaso extends Component {
             cargos: [],
             casoAprobar: props.a ? JSON.parse(sessionStorage.getItem("xd")) : null,
             evidencias: [],
-            contadorId: 0
+            contadorId: 0,
+            mention: ""
         };
         this.onGridRowsUpdated.bind(this);
         this.getCellActions.bind(this);
@@ -61,7 +64,22 @@ export default class ingresarCaso extends Component {
         this.insertarPersonaje.bind(this);
         this.handleChangeInputEvidencia.bind(this);
         this.handleDeleteRow.bind(this);
+        this.handleChangeMention.bind(this);
     }
+    renderTagSuggestion = [
+        {
+            id: 'walter',
+            display: 'Walter White',
+        },
+        {
+            id: 'jesse',
+            display: 'Jesse Pinkman',
+        },
+        {
+            id: 'gus',
+            display: 'Gustavo "Gus" Fring',
+        }
+    ]
 
     async componentWillMount() {
         var categoriasJSON = await Categoria.getCategorias();
@@ -130,6 +148,9 @@ export default class ingresarCaso extends Component {
         ];
         return column.key === "action" ? cellActions : null;
     };
+    handleChangeMention(event, newValue, newPlainTextValue, mentions) {
+        this.setState({ mention: newValue });
+    }
 
     async validarFormulario() {
         var flagFormValido = true;
@@ -226,6 +247,18 @@ export default class ingresarCaso extends Component {
                                 <Col className="ml-auto mr-auto text-dark font-weight-bold" md="6">*Nombre:</Col>
                                 <Col className="ml-auto mr-auto" md="6">
                                     <Input id="txtNombrePersonaje" disabled={this.props.a} value={this.props.a ? this.state.casoAprobar.nombre : null} />
+                                    <MentionsInput value={this.state.mention} onChange={this.handleChangeMention.bind(this)}>
+                                        <Mention
+                                            trigger="@"
+                                            data={this.props.users}
+                                            renderSuggestion={this.renderTagSuggestion}
+                                        />
+                                        <Mention
+                                            trigger="#"
+                                            data={this.requestTag}
+                                            renderSuggestion={this.renderTagSuggestion}
+                                        />
+                                    </MentionsInput>
                                 </Col>
                             </Row>
                             <Row className="my-1">
@@ -276,8 +309,8 @@ export default class ingresarCaso extends Component {
                                             <TextField
                                                 {...params}
                                                 variant="outlined"
-                                                // label="filterSelectedOptions"
-                                                // placeholder="Favorites"
+                                            // label="filterSelectedOptions"
+                                            // placeholder="Favorites"
                                             />
                                         )}
                                     />
