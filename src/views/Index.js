@@ -75,6 +75,12 @@ function Index() {
                             <p class="text-justify">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin diam eros, rutrum eu libero in, dictum tincidunt odio. Suspendisse ornare, nibh faucibus molestie auctor, quam augue eleifend mauris, sed aliquam metus metus in tortor. Donec vel varius dui, ac pharetra urna. Proin dictum at tortor in tincidunt. Phasellus feugiat scelerisque imperdiet. Morbi finibus cursus nisi, id lacinia enim praesent vitae.</p>
                         </Col>
                     </Row>
+                    <Row>
+                        <Col md="3"></Col>
+                        <Col md="4">
+                            <img style={{ width: "100%" }} src={require("assets/img/nolosolvides/logonolosolvides.png")} />
+                        </Col>
+                    </Row>
                 </Container>
                 <Container>
                     <Row>
