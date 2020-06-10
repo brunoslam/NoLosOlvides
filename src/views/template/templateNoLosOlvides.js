@@ -83,7 +83,7 @@ function TemplateNoLosOlvides(props) {
       </Container> */}
       <footer class="footer">
         <div class="container">
-          <span class="text-muted" style={{float: "right"}}>© {new Date().getFullYear()}, No Los Olvides
+          <span class="text-muted" style={{float: "right"}}>© {new Date().getFullYear()}, No Los Olvides. <small>Sitio en construcción</small>
             {/* <h6>
                     © {new Date().getFullYear()}, made with{" "}
                     <i className="fa fa-heart heart" /> by Creative Tim

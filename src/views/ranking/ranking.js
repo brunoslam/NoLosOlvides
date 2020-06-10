@@ -2,7 +2,7 @@ import React from 'react'
 import TemplateNoLosOlvides from "views/template/templateNoLosOlvides";
 import Personaje from "model/personaje";
 import {
-    Card, CardImg, CardText, CardBody,
+    Card, CardImg, CardText, CardHeader, CardBody,
     CardTitle, CardSubtitle, Button, Container, Row, Col
 } from 'reactstrap';
 export default function Ranking() {
@@ -22,11 +22,17 @@ export default function Ranking() {
                 <Row>
 
 
-                    {personajeArr.map((personaje) => {
+                    {personajeArr.map((personaje, index) => {
                         return (
                             <Col sm="6">
                                 <Card>
-                                    <CardImg top width="100%" src={personaje.imagenUrl} alt="Card image cap" />
+                                    <CardHeader style={{
+                                        maxHeight: "200px",
+                                        display: "flex"
+                                    }}>
+                                        {/* <CardText>#{index + 1}</CardText> */}
+                                        <CardImg top width="100%" src={personaje.imagenUrl} alt="Card image cap" />
+                                    </CardHeader>
                                     <CardBody>
                                         <CardTitle>{personaje.nombre} {personaje.apellido}</CardTitle>
                                         <CardSubtitle>Card subtitle</CardSubtitle>
