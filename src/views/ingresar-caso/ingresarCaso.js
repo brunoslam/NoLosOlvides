@@ -17,6 +17,7 @@ import Autocomplete from '@material-ui/lab/Autocomplete';
 import CloseIcon from '@material-ui/icons/Close';
 import ReactDataGrid from 'react-data-grid';
 import Categoria from "model/categoria";
+import CategoriaEvidencia from "model/categoriaEvidencia";
 import Cargos from "model/cargos";
 import Personaje from "model/personaje";
 import { MentionsInput, Mention } from 'react-mentions'
@@ -52,6 +53,7 @@ export default class ingresarCaso extends Component {
             rows: [
             ],
             categorias: [],
+            categoriasEvidencia: [],
             cargos: [],
             casoAprobar: props.a ? JSON.parse(sessionStorage.getItem("xd")) : null,
             evidencias: [],
@@ -83,8 +85,9 @@ export default class ingresarCaso extends Component {
 
     async componentWillMount() {
         var categoriasJSON = await Categoria.getCategorias();
+        var categoriasEvidenciaJSON = await CategoriaEvidencia.getCategoriasEvidencia();
         var cargosJSON = await Cargos.getCargos();
-        this.setState({ categorias: categoriasJSON, cargos: cargosJSON });
+        this.setState({ categorias: categoriasJSON, categoriasEvidencia: categoriasEvidenciaJSON, cargos: cargosJSON });
     }
 
     handleAddRow() {
@@ -108,6 +111,7 @@ export default class ingresarCaso extends Component {
             titulo: null,
             descripcion: null,
             fecha: null,
+            categoriaEvidencia: null,
             link: null,
         });
 
@@ -288,11 +292,28 @@ export default class ingresarCaso extends Component {
                             <Row className="my-1">
                                 <Col className="ml-auto mr-auto text-dark font-weight-bold" md="6">Cargo:</Col>
                                 <Col className="ml-auto mr-auto" md="6">
-                                    <select class="custom-select" id="selectCargoPersonaje" disabled={this.props.a} value={this.props.a ? this.state.casoAprobar.cargoId : null}>
+                                    {/* <select class="custom-select" id="selectCargoPersonaje" disabled={this.props.a} value={this.props.a ? this.state.casoAprobar.cargoId : null}>
+                                        <option value="" >- Selecciona una opción -</option>
                                         {this.state.cargos.map((cargo) => {
                                             return (<option value={cargo.idCargo}>{cargo.titulo}</option>);
                                         })}
-                                    </select>
+                                    </select> */}
+                                    <Autocomplete
+                                        multiple
+                                        id="tags-outlined"
+                                        options={this.state.cargos}
+                                        getOptionLabel={(cargo) => cargo.titulo}
+                                        // defaultValue={[top100Films[2]]}
+                                        filterSelectedOptions
+                                        renderInput={(params) => (
+                                            <TextField
+                                                {...params}
+                                                variant="outlined"
+                                            // label="filterSelectedOptions"
+                                            // placeholder="Favorites"
+                                            />
+                                        )}
+                                    />
                                 </Col>
                             </Row>
                             <Row className="my-1">
@@ -341,25 +362,39 @@ export default class ingresarCaso extends Component {
                                                     </Col>
                                                 </Row>
                                                 <Row className="my-3">
-                                                    <Col>Título</Col>
+                                                    <Col>Título:</Col>
                                                     <Col>
                                                         <Input value={evidencia.titulo} name="titulo" onChange={(e) => { this.handleChangeInputEvidencia(e, evidencia); }} />
                                                     </Col>
                                                 </Row>
                                                 <Row className="my-3">
-                                                    <Col>Descripción</Col>
+                                                    <Col>Descripción:</Col>
                                                     <Col>
                                                         <textarea className="form-control" value={evidencia.descripcion} name="descripcion" onChange={(e) => { this.handleChangeInputEvidencia(e, evidencia); }}></textarea>
                                                     </Col>
                                                 </Row>
                                                 <Row className="my-3">
-                                                    <Col>Fecha</Col>
+                                                    <Col>Fecha:</Col>
                                                     <Col>
                                                         <Input type="date" value={evidencia.fecha} name="fecha" onChange={(e) => { this.handleChangeInputEvidencia(e, evidencia); }} />
                                                     </Col>
                                                 </Row>
                                                 <Row className="my-3">
-                                                    <Col>Link</Col>
+                                                    <Col>Categoría evidencia:</Col>
+                                                    <Col>
+                                                        {/* <Input value={evidencia.titulo} name="titulo" onChange={(e) => { this.handleChangeInputEvidencia(e, evidencia); }} /> */}
+                                                        <select value={evidencia.categoriaEvidencia} class="custom-select" name="categoriaEvidencia" id="selectCargoPersonaje" onChange={(e) => { this.handleChangeInputEvidencia(e, evidencia); }}>
+                                                            <option value="" >- Selecciona una opción -</option>
+                                                            {this.state.categoriasEvidencia.map((categoriaEvidencia) => {
+                                                                return (<option value={categoriaEvidencia.idCategoriaEvidencia}>{categoriaEvidencia.titulo}</option>);
+                                                            })}
+                                                        </select>
+
+
+                                                    </Col>
+                                                </Row>
+                                                <Row className="my-3">
+                                                    <Col>Links:</Col>
                                                     <Col>
                                                         <Input value={evidencia.link} name="link" onChange={(e) => { this.handleChangeInputEvidencia(e, evidencia); }} />
                                                     </Col>
