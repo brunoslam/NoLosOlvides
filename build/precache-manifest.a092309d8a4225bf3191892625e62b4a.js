@@ -1,23 +1,23 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "183f3945b1bd35d926d16a22acdb831c",
+    "revision": "4f75f5ac89c9d6a3f5b03063aab6ffb9",
     "url": "/index.html"
   },
   {
-    "revision": "3f59a9bcff5bc31a14d5",
+    "revision": "a95fe9b6eced7c8198cb",
     "url": "/static/css/2.6b02dc3f.chunk.css"
   },
   {
-    "revision": "369e6bfd1e29c2229dd8",
-    "url": "/static/css/main.476015ee.chunk.css"
+    "revision": "4f2d8e9f021db96d6832",
+    "url": "/static/css/main.37b73ef1.chunk.css"
   },
   {
-    "revision": "3f59a9bcff5bc31a14d5",
-    "url": "/static/js/2.1500bca4.chunk.js"
+    "revision": "a95fe9b6eced7c8198cb",
+    "url": "/static/js/2.c17586ec.chunk.js"
   },
   {
-    "revision": "369e6bfd1e29c2229dd8",
-    "url": "/static/js/main.3a13672b.chunk.js"
+    "revision": "4f2d8e9f021db96d6832",
+    "url": "/static/js/main.5eb5d610.chunk.js"
   },
   {
     "revision": "42ac5946195a7306e2a5",
@@ -90,6 +90,10 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
     "revision": "be9fa468a029a195601370492c15519d",
     "url": "/static/media/login-image.be9fa468.jpg"
+  },
+  {
+    "revision": "c0f426930817773fda3188edd30741c0",
+    "url": "/static/media/logonolosolvides.c0f42693.png"
   },
   {
     "revision": "48ac036da7c7923266266f63746fc5f1",
