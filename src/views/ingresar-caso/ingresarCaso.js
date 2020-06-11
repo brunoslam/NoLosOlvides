@@ -20,6 +20,7 @@ import Categoria from "model/categoria";
 import CategoriaEvidencia from "model/categoriaEvidencia";
 import Cargos from "model/cargos";
 import Personaje from "model/personaje";
+import Utils from "model/utils";
 import { MentionsInput, Mention } from 'react-mentions'
 
 import BusquedaAutoCompleteCategoria from "components/NoLosOlvides/busquedaAutoCompleteCategoria";
@@ -37,14 +38,6 @@ import {
     Row,
     Col
 } from "reactstrap";
-const columns = [
-    { key: "id", name: "#", editable: false },
-    { key: "titulo", name: "Título", editable: true },
-    { key: "descripcion", name: "Descripción", editable: true },
-    { key: "fecha", name: "Fecha", editable: true },
-    { key: "link", name: "Link", editable: true },
-    { key: "action", name: "Action" }
-];
 
 export default class ingresarCaso extends Component {
     constructor(props) {
@@ -61,9 +54,7 @@ export default class ingresarCaso extends Component {
             mention: ""
         };
         this.onGridRowsUpdated.bind(this);
-        this.getCellActions.bind(this);
         this.validarFormulario.bind(this);
-        this.insertarPersonaje.bind(this);
         this.handleChangeInputEvidencia.bind(this);
         this.handleDeleteRow.bind(this);
         this.handleChangeMention.bind(this);
@@ -91,22 +82,9 @@ export default class ingresarCaso extends Component {
     }
 
     handleAddRow() {
-        // var newData = this.state.rows;
-        // var nuevoIndice = this.state.rows.length == 0 ? 1 : this.state.rows.slice(-1).pop().id + 1
-        // newData.push(
-        //     {
-        //         id: nuevoIndice,
-        //         titulo: null,
-        //         descripcion: null,
-        //         fecha: null,
-        //         link: null,
-        //     }
-        // );
-        // this.setState({ rows: newData });
-
-        var asd = this.state.evidencias;
+        var arrEvidencias = this.state.evidencias;
         var id = this.state.contadorId + 1;
-        asd.push({
+        arrEvidencias.push({
             id: id,
             titulo: null,
             descripcion: null,
@@ -114,9 +92,7 @@ export default class ingresarCaso extends Component {
             categoriaEvidencia: null,
             link: null,
         });
-
-        this.setState({ evidencias: asd, contadorId: id });
-
+        this.setState({ evidencias: arrEvidencias, contadorId: id });
     }
 
     handleChangeInputEvidencia(e, evidenciaChange) {
@@ -138,20 +114,6 @@ export default class ingresarCaso extends Component {
             this.setState({ evidencias: arr });
         }
     }
-    getCellActions = (column, row) => {
-        const cellActions = [
-            {
-                // icon: <span className="glyphicon glyphicon-remove" />,
-                icon: <CloseIcon />,
-                callback: () => {
-                    const rows = [...this.state.rows];
-                    rows.splice(row.index, 1); //
-                    this.setState({ rows: rows });
-                }
-            }
-        ];
-        return column.key === "action" ? cellActions : null;
-    };
     handleChangeMention(event, newValue, newPlainTextValue, mentions) {
         this.setState({ mention: newValue });
     }
@@ -196,38 +158,12 @@ export default class ingresarCaso extends Component {
                 "imagenUrl": imagenUrl,
                 "idEstadoAprobacion": 1
             }
-            this.insertarPersonaje(personaje);
+            Personaje.insertarPersonaje(personaje);
 
         }
 
 
     }
-
-    async insertarPersonaje(personaje) {
-
-        try {
-            var response = await (await fetch(`${process.env.NODE_ENV == "development" ? NoLosOlvidesInfo.urlApi : NoLosOlvidesInfo.urlApiProd}/api/Personajes`, {
-                method: 'POST', // or 'PUT'
-                body: JSON.stringify(personaje), // data can be `string` or {object}!
-                // mode: 'no-cors',
-                headers: {
-                    'Content-Type': 'application/json'
-                }
-            }));
-            var json = await response.json();
-
-
-            if (json.message) {
-                alert(json.message)
-            } else {
-                alert("Se ha guardado correctamente");
-                window.location.reload();
-            }
-        } catch (error) {
-            alert("Se ha producido un error al ingresar la información intenta más tarde");
-        }
-    }
-
     onGridRowsUpdated = ({ fromRow, toRow, updated }) => {
         this.setState(state => {
             const rows = state.rows.slice();
@@ -237,10 +173,6 @@ export default class ingresarCaso extends Component {
             return { rows };
         });
     };
-    isOdd(num) {
-        return num % 2;
-    }
-
     render() {
         return (
             <TemplateNoLosOlvides>
@@ -353,7 +285,7 @@ export default class ingresarCaso extends Component {
                             {
                                 this.state.evidencias.map((evidencia, i) => {
                                     return (
-                                        <Row className="border-bottom border-secondary rounded-lg" style={{ backgroundColor: this.isOdd(i) ? "" : "#66666624" }}>
+                                        <Row className="border-bottom border-secondary rounded-lg" style={{ backgroundColor: Utils.isOdd(i) ? "" : "#66666624" }}>
                                             <Col md="10">
                                                 <Row className="my-3">
                                                     <Col className="font-weight-bold">Evidencia #{i + 1}
@@ -389,8 +321,6 @@ export default class ingresarCaso extends Component {
                                                                 return (<option value={categoriaEvidencia.idCategoriaEvidencia}>{categoriaEvidencia.titulo}</option>);
                                                             })}
                                                         </select>
-
-
                                                     </Col>
                                                 </Row>
                                                 <Row className="my-3">
@@ -414,19 +344,6 @@ export default class ingresarCaso extends Component {
                                     {/* <Col className="float-right" md="2"><Button>-</Button></Col> */}
                                 </Col>
                             </Row>
-
-                            {/* <Row className="my-1">
-                                <Col className="ml-auto mr-auto" md="12">
-                                    <ReactDataGrid
-                                        columns={columns}
-                                        rowGetter={i => this.state.rows[i]}
-                                        rowsCount={this.state.rows.length}
-                                        onGridRowsUpdated={this.onGridRowsUpdated}
-                                        enableCellSelect={true}
-                                        getCellActions={this.getCellActions}
-                                    />
-                                </Col>
-                            </Row> */}
                             {
                                 this.props.a ? <></> :
                                     <Row className="my-5">
@@ -437,11 +354,6 @@ export default class ingresarCaso extends Component {
                                 <Col className="ml-auto mr-auto" md="6"></Col>
                                 <Col className="ml-auto mr-auto" md="6"></Col>
                             </Row>
-
-
-
-
-
                         </Col>
                     </Row >
                 </Container>
@@ -449,13 +361,3 @@ export default class ingresarCaso extends Component {
         )
     }
 }
-
-
-// export default function IngresarCaso(props) {
-//     // const classes = useStyles();
-
-
-//     return (
-
-//     )
-// }

@@ -31,4 +31,30 @@ export default class Personaje {
         return json;
     }
 
+    async insertarPersonaje(personaje) {
+
+        try {
+            var response = await (await fetch(`${process.env.NODE_ENV == "development" ? NoLosOlvidesInfo.urlApi : NoLosOlvidesInfo.urlApiProd}/api/Personajes`, {
+                method: 'POST', // or 'PUT'
+                body: JSON.stringify(personaje), // data can be `string` or {object}!
+                // mode: 'no-cors',
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            }));
+            var json = await response.json();
+
+
+            if (json.message) {
+                alert(json.message)
+            } else {
+                alert("Se ha guardado correctamente");
+                window.location.reload();
+            }
+        } catch (error) {
+            alert("Se ha producido un error al ingresar la información intenta más tarde");
+        }
+    }
+
+
 }
