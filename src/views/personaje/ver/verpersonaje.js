@@ -25,7 +25,7 @@ import DemoFooter from "components/Footers/DemoFooter.js";
 
 function VerPersonaje() {
     const [activeTab, setActiveTab] = React.useState("1");
-    const [idPersonajeBuscar, setIdPersonajeBuscar] = React.useState(3);
+    const [idPersonajeBuscar, setIdPersonajeBuscar] = React.useState(parseInt(sessionStorage.getItem("personajeSeleccionadoHome")));
     const [personajeBuscar, setPersonajeBuscar] = React.useState(null);
     const [isLoading, setIsLoading] = React.useState(true);
 
