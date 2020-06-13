@@ -8,7 +8,7 @@ import Logout from "views/staff/login/logout";
 const seccionesLogin = [
     {
         Title: "Gestionar aprobaciones",
-        Url: "#/staff/aprobar-caso",
+        Url: "#/staff/aprobacion",
         Icon: "nc-icon nc-paper",
         Component: IngresarCaso,
         Divider: false
