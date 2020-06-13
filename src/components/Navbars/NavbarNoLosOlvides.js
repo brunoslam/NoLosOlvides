@@ -33,7 +33,7 @@ import {
 } from "reactstrap";
 import NoLosOlvidesInfo from "variables/NoLosOlvidesInfo";
 import Secciones from "variables/secciones";
-function ExamplesNavbar() {
+function NavbarNoLosOlvides() {
   const [navbarColor, setNavbarColor] = React.useState("");
   const [navbarCollapse, setNavbarCollapse] = React.useState(false);
 
@@ -166,4 +166,4 @@ function ExamplesNavbar() {
   );
 }
 
-export default ExamplesNavbar;
+export default NavbarNoLosOlvides;

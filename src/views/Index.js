@@ -22,7 +22,7 @@ import React from "react";
 
 // core components
 import IndexNavbar from "components/Navbars/IndexNavbar.js";
-import ExamplesNavbar from "components/Navbars/ExamplesNavbar.js";
+import NavbarNoLosOlvides from "components/Navbars/NavbarNoLosOlvides.js";
 import IndexHeader from "components/Headers/IndexHeader.js";
 import DemoFooter from "components/Footers/DemoFooter.js";
 
@@ -91,7 +91,7 @@ function Index() {
                 </Container>
 
 
-                {/* <ExamplesNavbar />
+                {/* <NavbarNoLosOlvides />
                 <div className="main">
                     
                 <SectionButtons />

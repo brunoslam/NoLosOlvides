@@ -25,7 +25,7 @@ import { palette, spacing, typography } from '@material-ui/system';
 import { Button, Card, Form, Input, Container, Row, Col } from "reactstrap";
 
 // core components
-import ExamplesNavbar from "components/Navbars/ExamplesNavbar.js";
+import NavbarNoLosOlvides from "components/Navbars/NavbarNoLosOlvides.js";
 
 // const theme = createMuiTheme();
 const theme = {
@@ -65,7 +65,7 @@ function TemplateNoLosOlvides(props) {
       <Container id="containerPage">
         <Row>
           <Col xs={12} sm={12} md={12} justify="space-around">
-            <ExamplesNavbar />
+            <NavbarNoLosOlvides />
           </Col>
         </Row>
         <Row>

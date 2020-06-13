@@ -19,7 +19,7 @@ import {
 } from "reactstrap";
 
 // core components
-import ExamplesNavbar from "components/Navbars/ExamplesNavbar.js";
+import NavbarNoLosOlvides from "components/Navbars/NavbarNoLosOlvides.js";
 import ProfilePageHeader from "components/Headers/ProfilePageHeader.js";
 import DemoFooter from "components/Footers/DemoFooter.js";
 
@@ -66,7 +66,7 @@ function VerPersonaje() {
         } else {
             return (
                 <>
-                    <ExamplesNavbar />
+                    <NavbarNoLosOlvides />
                     <ProfilePageHeader />
                     <div className="section profile-content">
                         <Container>
