@@ -5,6 +5,7 @@ import Ranking from "views/ranking/ranking";
 import BuscadorAvanzado from "views/buscador-avanzado/buscadorAvanzado";
 import Login from "views/staff/login/login";
 import Logout from "views/staff/login/logout";
+import SessionNoLosOlvides from "variables/sesiones";
 const seccionesLogin = [
     {
         Title: "Gestionar aprobaciones",
@@ -49,12 +50,12 @@ const seccionesPagina = [
         Component: Categorias
     },
     {
-        Title: sessionStorage.getItem("loginState") == "true" ? "Cerrar sesión" : "Iniciar sesión",
-        Url: sessionStorage.getItem("loginState") == "true" ? "/staff/logout" : "/staff/login",
-        Icon: sessionStorage.getItem("loginState") == "true" ? "nc-icon nc-lock-circle-open" : "nc-icon nc-key-25",
+        Title: sessionStorage.getItem(SessionNoLosOlvides.loginState) == "true" ? "Cerrar sesión" : "Iniciar sesión",
+        Url: sessionStorage.getItem(SessionNoLosOlvides.loginState) == "true" ? "/staff/logout" : "/staff/login",
+        Icon: sessionStorage.getItem(SessionNoLosOlvides.loginState) == "true" ? "nc-icon nc-lock-circle-open" : "nc-icon nc-key-25",
         Component: Login,
         notRegister: true,
-        subMenu: sessionStorage.getItem("loginState") == "true" ? seccionesLogin : null
+        subMenu: sessionStorage.getItem(SessionNoLosOlvides.loginState) == "true" ? seccionesLogin : null
     }
 
 ]

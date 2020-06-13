@@ -1,17 +1,18 @@
 import React, { useState, useEffect } from 'react';
 import TemplateNoLosOlvides from "views/template/templateNoLosOlvides";
+import SessionNoLosOlvides from "variables/sesiones";
 export default function Logout() {
     const [contador, setContador] = React.useState(5);
     const [info, setInfo] = React.useState({ logout: false, contador: 6 });
     useEffect(() => {
-        if (sessionStorage.getItem("loginState") != "true") {
+        if (sessionStorage.getItem(SessionNoLosOlvides.loginState) != "true") {
             window.location.href = "/#/index";
         } else {
 
             const timer = window.setTimeout(() => {
                 var c = info.contador - 1;
                 if (c == 0) {
-                    sessionStorage.setItem("loginState", "");
+                    sessionStorage.setItem(SessionNoLosOlvides.loginState, "");
 
                     window.location.reload();
                 } else {

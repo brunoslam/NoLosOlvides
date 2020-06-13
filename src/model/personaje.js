@@ -21,7 +21,7 @@ export default class Personaje {
     }
 
     static async getPersonajesPendiente(idPersonajeBuscar) {
-        var response = await (await fetch(`${process.env.NODE_ENV == "development" ? NoLosOlvidesInfo.urlApi : NoLosOlvidesInfo.urlApiProd}/api/Personajes`));
+        var response = await (await fetch(`${process.env.NODE_ENV == "development" ? NoLosOlvidesInfo.urlApi : NoLosOlvidesInfo.urlApiProd}/api/Personajes/pendientes`));
         var json = await response.json();
         return json;
     }

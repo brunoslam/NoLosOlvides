@@ -1,8 +1,9 @@
 import React from 'react'
 import Ingresar from "views/ingresar-caso/ingresarCaso";
 import { Button, Container, Row, Col } from 'reactstrap';
+import SessionNoLosOlvides from "variables/sesiones";
 export default function Aprobacion() {
-    if (sessionStorage.getItem("loginState") != "true") {
+    if (sessionStorage.getItem(SessionNoLosOlvides.loginState) != "true") {
         window.location.href = "/#/index";
     }
 
@@ -11,7 +12,7 @@ export default function Aprobacion() {
 
     }
     return (
-        sessionStorage.getItem("loginState") != "true" ? <></> :
+        sessionStorage.getItem(SessionNoLosOlvides.loginState) != "true" ? <></> :
         <>
             <Container>
                 <Ingresar a={true} />

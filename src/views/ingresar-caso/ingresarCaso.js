@@ -22,6 +22,7 @@ import Cargos from "model/cargos";
 import Personaje from "model/personaje";
 import Utils from "model/utils";
 import { MentionsInput, Mention } from 'react-mentions'
+import SessionNoLosOlvides from "variables/sesiones";
 
 import BusquedaAutoCompleteCategoria from "components/NoLosOlvides/busquedaAutoCompleteCategoria";
 import { Button, Label, FormGroup, Input, NavItem, NavLink, Nav, TabContent, TabPane, Container, Row, Col } from "reactstrap";
@@ -35,7 +36,7 @@ export default class ingresarCaso extends Component {
             categorias: [],
             categoriasEvidencia: [],
             cargos: [],
-            casoAprobar: props.a ? JSON.parse(sessionStorage.getItem("xd")) : null,
+            casoAprobar: null,
             evidencias: [],
             contadorId: 0,
             mention: "",
@@ -69,7 +70,12 @@ export default class ingresarCaso extends Component {
         var categoriasJSON = await Categoria.getCategorias();
         var categoriasEvidenciaJSON = await CategoriaEvidencia.getCategoriasEvidencia();
         var cargosJSON = await Cargos.getCargos();
-        this.setState({ categorias: categoriasJSON, categoriasEvidencia: categoriasEvidenciaJSON, cargos: cargosJSON });
+        var casoAprobar = null;
+        if (this.props.a) {
+            casoAprobar = JSON.parse(sessionStorage.getItem(SessionNoLosOlvides.casoAprobar));
+        }
+
+        this.setState({ categorias: categoriasJSON, categoriasEvidencia: categoriasEvidenciaJSON, cargos: cargosJSON, casoAprobar: casoAprobar });
     }
 
     handleAddRow() {
@@ -171,7 +177,7 @@ export default class ingresarCaso extends Component {
             });
 
             if (Personaje.checkPersonajePorNombre(personaje)) {
-                if(window.confirm("¿Estás seguro que deseas ingresar esta información?") == true){
+                if (window.confirm("¿Estás seguro que deseas ingresar esta información?") == true) {
                     //deshabilitar botón
                     Personaje.insertarPersonaje(personaje);
                 }

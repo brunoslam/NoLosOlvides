@@ -2,17 +2,18 @@ import React from 'react';
 import TemplateNoLosOlvides from "views/template/templateNoLosOlvides";
 import { Button, Card, Form, Input, Container, Row, Col } from "reactstrap";
 import NoLosOlvidesInfo from "variables/NoLosOlvidesInfo";
+import SessionNoLosOlvides from "variables/sesiones";
 export default function Login() {
     const [loginState, setLoginState] = React.useState({});
     const [isLoading, setIsLoading] = React.useState(true);
 
-    // if (sessionStorage.getItem("loginState") == "true") {
+    // if (sessionStorage.getItem(SessionNoLosOlvides.loginState) == "true") {
     //     window.location.href = "/#/staff/aprobacion";
     // }
 
     React.useEffect(() => {
         debugger;
-        if (sessionStorage.getItem("loginState") == "true") {
+        if (sessionStorage.getItem(SessionNoLosOlvides.loginState) == "true") {
             window.location.href = "/#/staff/aprobacion";
         } else {
             setIsLoading(false);
@@ -44,7 +45,7 @@ export default function Login() {
                 alert("Usuario o contraseña incorrecta");
             } else {
                 alert("Iniciaste sesión correctamente");
-                sessionStorage.setItem("loginState", "true");
+                sessionStorage.setItem(SessionNoLosOlvides.loginState, "true");
                 window.location.reload();
             }
 

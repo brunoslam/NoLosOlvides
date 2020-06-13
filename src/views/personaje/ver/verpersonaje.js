@@ -22,10 +22,10 @@ import {
 import NavbarNoLosOlvides from "components/Navbars/NavbarNoLosOlvides.js";
 import ProfilePageHeader from "components/Headers/ProfilePageHeader.js";
 import DemoFooter from "components/Footers/DemoFooter.js";
-
+import SessionNoLosOlvides from "variables/sesiones";
 function VerPersonaje() {
     const [activeTab, setActiveTab] = React.useState("1");
-    const [idPersonajeBuscar, setIdPersonajeBuscar] = React.useState(parseInt(sessionStorage.getItem("personajeSeleccionadoHome")));
+    const [idPersonajeBuscar, setIdPersonajeBuscar] = React.useState(parseInt(sessionStorage.getItem(SessionNoLosOlvides.personajeSeleccionadoHome)));
     const [personajeBuscar, setPersonajeBuscar] = React.useState(null);
     const [isLoading, setIsLoading] = React.useState(true);
 

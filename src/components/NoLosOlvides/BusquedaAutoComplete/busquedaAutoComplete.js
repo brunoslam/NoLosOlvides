@@ -5,6 +5,7 @@ import TextField from '@material-ui/core/TextField';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import PulseLoader from "react-spinners/PulseLoader";
 import Personaje from "model/personaje";
+import SessionNoLosOlvides from "variables/sesiones";
 import {
     Button,
     Label,
@@ -58,7 +59,7 @@ export default class busquedaAutoComplete extends Component {
 
             if (resultados.length > 0) {
                 this.setState({ busquedaNoEncontrada: false });
-                sessionStorage.setItem("personajeSeleccionadoHome", resultados[0].idPersonaje);
+                sessionStorage.setItem(SessionNoLosOlvides.personajeSeleccionadoHome, resultados[0].idPersonaje);
                 window.location.href = "/#/personaje";
             } else {
                 this.setState({ busquedaNoEncontrada: true });
@@ -68,14 +69,14 @@ export default class busquedaAutoComplete extends Component {
 
 
     render() {
-        if(this.state.isLoading){
-            return(<PulseLoader
+        if (this.state.isLoading) {
+            return (<PulseLoader
                 // css={override}
                 size={20}
                 color={"grey"}
-                // loading={this.state.loading}
-              />);
-        }else{
+            // loading={this.state.loading}
+            />);
+        } else {
             return (
                 <Container>
                     <Row>
@@ -95,7 +96,7 @@ export default class busquedaAutoComplete extends Component {
                                     this.setAutocompleteValue(event, newValue);
                                 }}
                             // onClick={(e, x) => { this.derivarPerfil(e, x); }}
-    
+
                             />
                         </Col>
                         {/* <Autocomplete
@@ -131,7 +132,7 @@ export default class busquedaAutoComplete extends Component {
                                 </Col>
                             </Row> : <></>
                     }
-    
+
                 </Container>
             )
         }

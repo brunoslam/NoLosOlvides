@@ -2,10 +2,11 @@ import React from 'react'
 import TemplateNoLosOlvides from "views/template/templateNoLosOlvides";
 import { Table, Button } from 'reactstrap';
 import Personaje from "model/personaje";
+import SessionNoLosOlvides from "variables/sesiones";
 export default function TablaAprobacion() {
     const [personajesPendientes, setPersonajesPendientes] = React.useState([]);
 
-    if (sessionStorage.getItem("loginState") != "true") {
+    if (sessionStorage.getItem(SessionNoLosOlvides.loginState) != "true") {
         window.location.href = "/#/index";
     }
 
@@ -20,11 +21,11 @@ export default function TablaAprobacion() {
     });
     function DerivarAprobacion(personaje) {
         // alert(personaje);
-        sessionStorage.setItem("xd", JSON.stringify(personaje));
+        sessionStorage.setItem(SessionNoLosOlvides.casoAprobar, JSON.stringify(personaje));
         window.location.href = "/#/staff/aprobar-caso";
     }
     return (
-        sessionStorage.getItem("loginState") != "true" ? <></> :
+        sessionStorage.getItem(SessionNoLosOlvides.loginState) != "true" ? <></> :
         <TemplateNoLosOlvides>
             <Table>
                 <thead>
