@@ -79,5 +79,28 @@ export default class Personaje {
         }
     }
 
+    static async aprobarPersonaje(personaje) {
+        var json = null;
+        try {
+            var response = await (await fetch(`${process.env.NODE_ENV == "development" ? NoLosOlvidesInfo.urlApi : NoLosOlvidesInfo.urlApiProd}/api/Personajes/${personaje.idPersonaje}`, {
+                method: 'PUT', // or 'PUT'
+                body: JSON.stringify(personaje), // data can be `string` or {object}!
+                // mode: 'no-cors',
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            }));
+            json = await response?.json();
+        } catch (error) {
+            // alert("Se ha producido un error al ingresar la información intenta más tarde");
+        }
+        debugger;
+        if (json?.message) {
+            alert(json.message)
+        } else {
+            alert("Se ha guardado correctamente");
+            window.location.reload();
+        }
 
+    }
 }

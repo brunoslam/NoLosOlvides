@@ -73,7 +73,7 @@ export default class ingresarCaso extends Component {
         var cargosJSON = await Cargos.getCargos();
         var casoAprobar = null;
         if (this.props.a) {
-            casoAprobar = JSON.parse(sessionStorage.getItem(SessionNoLosOlvides.casoAprobar));
+            // casoAprobar = JSON.parse(sessionStorage.getItem(SessionNoLosOlvides.casoAprobar));
             const personaje = JSON.parse(sessionStorage.getItem(SessionNoLosOlvides.casoAprobar));
             casoAprobar = await Personaje.getPersonajePorId(personaje.idPersonaje);
         }
