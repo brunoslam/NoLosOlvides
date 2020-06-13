@@ -161,7 +161,7 @@ export default class ingresarCaso extends Component {
                 "arrCargo": cargos,
                 "arrCategoria": categorias,
                 "imagenUrl": imagenUrl,
-                "idEstadoAprobacion": 1,
+                "IdEstadoAprobacion": 1,
                 "arrEvidencias": [
 
                 ]

@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 
 import TextField from '@material-ui/core/TextField';
 import Autocomplete from '@material-ui/lab/Autocomplete';
-
+import PulseLoader from "react-spinners/PulseLoader";
 import Personaje from "model/personaje";
 import {
     Button,
@@ -30,7 +30,8 @@ export default class busquedaAutoComplete extends Component {
             personajes: [],
             autocompleteValue: { event: null, value: null },
             autocompleteInputValue: null,
-            busquedaNoEncontrada: false
+            busquedaNoEncontrada: false,
+            isLoading: true
         };
         this.derivarPerfil.bind(this);
         this.setAutocompleteValue.bind(this);
@@ -39,7 +40,7 @@ export default class busquedaAutoComplete extends Component {
 
     async componentWillMount() {
         var personajesArr = await Personaje.getPersonajes();
-        this.setState({ personajes: personajesArr });
+        this.setState({ personajes: personajesArr, isLoading: false });
     }
     setAutocompleteValue(event, newValue) {
         this.setState({ autocompleteValue: { event: event, value: newValue } });
@@ -67,63 +68,72 @@ export default class busquedaAutoComplete extends Component {
 
 
     render() {
-        return (
-            <Container>
-                <Row>
-                    <Col>
-                        <Autocomplete
-                            id="free-solo-demo"
-                            freeSolo
-                            options={this.state.personajes.map((option) => `${option.nombre} ${option.apellido}`)}
-                            renderInput={(params) => (
-                                <TextField {...params} label="Ingresa un nombre" margin="normal" variant="outlined" />
-                            )}
-                            onInputChange={(event, newInputValue) => {
-                                this.setAutocompleteInputValue(event, newInputValue);
-                            }}
-                            value={this.state.autocompleteValue.value}
-                            onChange={(event, newValue) => {
-                                this.setAutocompleteValue(event, newValue);
-                            }}
-                        // onClick={(e, x) => { this.derivarPerfil(e, x); }}
-
-                        />
-                    </Col>
-                    {/* <Autocomplete
-                    freeSolo
-                    id="free-solo-2-demo"
-                    disableClearable
-                    options={this.state.personajes.map((option) => `${option.nombre} ${option.apellido}`)}
-                    renderInput={(params) => (
-                        <TextField
-                            {...params}
-                            label="Search input"
-                            margin="normal"
-                            variant="outlined"
-                            InputProps={{ ...params.InputProps, type: 'search' }}
-                        // onClick={(e) => { this.derivarPerfil(e); }}
-                        />
-                    )}
-                /> */}
-                </Row>
-                <Row>
-                    <Col xs={{ size: 8, offset: 4 }} sm={{ size: 8, offset: 4 }} md={{ size: 8, offset: 4 }}>
-                        <Button onClick={(e) => {
-                            e.preventDefault();
-                            this.derivarPerfil();
-                        }}>Buscar</Button>
-                    </Col>
-                </Row>
-                {
-                    this.state.busquedaNoEncontrada ?
-                        <Row>
-                            <Col>
-                                Búsqueda no arrojó resultados, prueba con las sugerencias o <a href="/#/ingresar" className="font-weight-bold">ingresa un caso</a>
-                            </Col>
-                        </Row> : <></>
-                }
-
-            </Container>
-        )
+        if(this.state.isLoading){
+            return(<PulseLoader
+                // css={override}
+                size={20}
+                color={"grey"}
+                // loading={this.state.loading}
+              />);
+        }else{
+            return (
+                <Container>
+                    <Row>
+                        <Col>
+                            <Autocomplete
+                                id="free-solo-demo"
+                                freeSolo
+                                options={this.state.personajes.map((option) => `${option.nombre} ${option.apellido}`)}
+                                renderInput={(params) => (
+                                    <TextField {...params} label="Ingresa un nombre" margin="normal" variant="outlined" />
+                                )}
+                                onInputChange={(event, newInputValue) => {
+                                    this.setAutocompleteInputValue(event, newInputValue);
+                                }}
+                                value={this.state.autocompleteValue.value}
+                                onChange={(event, newValue) => {
+                                    this.setAutocompleteValue(event, newValue);
+                                }}
+                            // onClick={(e, x) => { this.derivarPerfil(e, x); }}
+    
+                            />
+                        </Col>
+                        {/* <Autocomplete
+                        freeSolo
+                        id="free-solo-2-demo"
+                        disableClearable
+                        options={this.state.personajes.map((option) => `${option.nombre} ${option.apellido}`)}
+                        renderInput={(params) => (
+                            <TextField
+                                {...params}
+                                label="Search input"
+                                margin="normal"
+                                variant="outlined"
+                                InputProps={{ ...params.InputProps, type: 'search' }}
+                            // onClick={(e) => { this.derivarPerfil(e); }}
+                            />
+                        )}
+                    /> */}
+                    </Row>
+                    <Row>
+                        <Col xs={{ size: 8, offset: 4 }} sm={{ size: 8, offset: 4 }} md={{ size: 8, offset: 4 }}>
+                            <Button onClick={(e) => {
+                                e.preventDefault();
+                                this.derivarPerfil();
+                            }}>Buscar</Button>
+                        </Col>
+                    </Row>
+                    {
+                        this.state.busquedaNoEncontrada ?
+                            <Row>
+                                <Col>
+                                    Búsqueda no arrojó resultados, prueba con las sugerencias o <a href="/#/ingresar" className="font-weight-bold">ingresa un caso</a>
+                                </Col>
+                            </Row> : <></>
+                    }
+    
+                </Container>
+            )
+        }
     }
 }
