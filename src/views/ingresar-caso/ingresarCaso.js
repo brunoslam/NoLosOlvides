@@ -264,7 +264,7 @@ export default class ingresarCaso extends Component {
                                             options={this.state.cargos}
                                             getOptionLabel={(cargo) => cargo.titulo}
                                             disabled={this.props.a}
-                                            value={this.props.a ? this.state.casoAprobar.arrCargo : []}
+                                            value={this.props.a ? this.state.casoAprobar.arrCargo : this.state.cargosSeleccionados}
                                             // defaultValue={[top100Films[2]]}
                                             filterSelectedOptions
                                             renderInput={(params) => (
@@ -290,7 +290,7 @@ export default class ingresarCaso extends Component {
                                             options={this.state.categorias}
                                             getOptionLabel={(categoria) => categoria.titulo}
                                             disabled={this.props.a}
-                                            value={this.props.a ? this.state.casoAprobar.arrCategoria : []}
+                                            value={this.props.a ? this.state.casoAprobar.arrCategoria : this.state.categoriasSeleccionados}
                                             // defaultValue={[top100Films[2]]}
                                             filterSelectedOptions
                                             renderInput={(params) => (
