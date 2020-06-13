@@ -31,7 +31,7 @@ export default class Personaje {
         return json;
     }
 
-    async insertarPersonaje(personaje) {
+    static async insertarPersonaje(personaje) {
 
         try {
             var response = await (await fetch(`${process.env.NODE_ENV == "development" ? NoLosOlvidesInfo.urlApi : NoLosOlvidesInfo.urlApiProd}/api/Personajes`, {
@@ -53,6 +53,29 @@ export default class Personaje {
             }
         } catch (error) {
             alert("Se ha producido un error al ingresar la información intenta más tarde");
+        }
+    }
+
+    static async checkPersonajePorNombre(personaje) {
+        try {
+            var response = await (await fetch(`${process.env.NODE_ENV == "development" ? NoLosOlvidesInfo.urlApi : NoLosOlvidesInfo.urlApiProd}/api/Personajes/BuscarPorNombre`, {
+                method: 'POST', // or 'PUT'
+                body: JSON.stringify(personaje), // data can be `string` or {object}!
+                // mode: 'no-cors',
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            }));
+            var json = await response.json();
+            if (json.message) {
+                alert(json.message);
+                return false;
+            } else {
+                return true;
+            }
+        } catch (error) {
+            alert("Se ha producido un error al ingresar la información intenta más tarde");
+            return false;
         }
     }
 

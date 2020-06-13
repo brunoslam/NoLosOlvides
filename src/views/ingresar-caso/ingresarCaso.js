@@ -24,20 +24,7 @@ import Utils from "model/utils";
 import { MentionsInput, Mention } from 'react-mentions'
 
 import BusquedaAutoCompleteCategoria from "components/NoLosOlvides/busquedaAutoCompleteCategoria";
-import {
-    Button,
-    Label,
-    FormGroup,
-    Input,
-    NavItem,
-    NavLink,
-    Nav,
-    TabContent,
-    TabPane,
-    Container,
-    Row,
-    Col
-} from "reactstrap";
+import { Button, Label, FormGroup, Input, NavItem, NavLink, Nav, TabContent, TabPane, Container, Row, Col } from "reactstrap";
 
 export default class ingresarCaso extends Component {
     constructor(props) {
@@ -51,13 +38,17 @@ export default class ingresarCaso extends Component {
             casoAprobar: props.a ? JSON.parse(sessionStorage.getItem("xd")) : null,
             evidencias: [],
             contadorId: 0,
-            mention: ""
+            mention: "",
+            cateriasSeleccionadas: [],
+            cargosSeleccionados: []
         };
         this.onGridRowsUpdated.bind(this);
         this.validarFormulario.bind(this);
         this.handleChangeInputEvidencia.bind(this);
         this.handleDeleteRow.bind(this);
         this.handleChangeMention.bind(this);
+        this.handleChangeValueAcCargo.bind(this);
+        this.handleChangeValueAcCategoria.bind(this);
     }
     renderTagSuggestion = [
         {
@@ -89,7 +80,7 @@ export default class ingresarCaso extends Component {
             titulo: null,
             descripcion: null,
             fecha: null,
-            categoriaEvidencia: null,
+            idCategoriaEvidencia: null,
             link: null,
         });
         this.setState({ evidencias: arrEvidencias, contadorId: id });
@@ -99,7 +90,12 @@ export default class ingresarCaso extends Component {
         var arr = this.state.evidencias;
         arr.map((evidencia) => {
             if (evidencia.id == evidenciaChange.id) {
-                evidencia[e.target.name] = e.target.value;
+                if (e.target.id == "selectCargoPersonaje") {
+                    evidencia[e.target.name] = parseInt(e.target.value);
+                } else {
+                    evidencia[e.target.name] = e.target.value;
+                }
+
             }
         });
         this.setState({ evidencias: arr });
@@ -117,6 +113,12 @@ export default class ingresarCaso extends Component {
     handleChangeMention(event, newValue, newPlainTextValue, mentions) {
         this.setState({ mention: newValue });
     }
+    handleChangeValueAcCargo(event, newValue) {
+        this.setState({ cargosSeleccionados: newValue });
+    }
+    handleChangeValueAcCategoria(event, newValue) {
+        this.setState({ cateriasSeleccionadas: newValue });
+    }
 
     async validarFormulario() {
         var flagFormValido = true;
@@ -126,11 +128,12 @@ export default class ingresarCaso extends Component {
         var descripcion = (document.getElementById("txtDescripcionPersonaje")).value;
         var rut = (document.getElementById("txtRutPersonaje")).value;
         var nacionalidad = (document.getElementById("txtNacionalidadPersonaje")).value;
-        var cargo = (document.getElementById("selectCargoPersonaje")).value;
+        var cargos = this.state.cargosSeleccionados;
+        var categorias = this.state.cateriasSeleccionadas;
         var imagenUrl = (document.getElementById("txtImagenPersonaje")).value;
 
 
-        if (!nombre || !apellido || !cargo) {
+        if (!nombre || !apellido || !cargos || !categorias) {
             alert("Debes completar los campos obligatorios");
             flagFormValido = false;
         }
@@ -140,8 +143,8 @@ export default class ingresarCaso extends Component {
             flagFormValido = false;
         } else {
             this.state.evidencias.map((row) => {
-                if (!row.titulo || !row.descripcion || !row.fecha || !row.link) {
-                    alert("Debes compeltar todos los datos de la tabla");
+                if (!row.titulo || !row.descripcion || !row.fecha || !row.link || !row.idCategoriaEvidencia) {
+                    alert("Debes compeltar todos los datos de las evidencias");
                     flagFormValido = false;
                 }
             });
@@ -154,15 +157,28 @@ export default class ingresarCaso extends Component {
                 "descripcion": descripcion,
                 "rut": rut,
                 "nacionalidad": nacionalidad,
-                "idCargo": parseInt(cargo),
+                // "idCargo": parseInt(cargo),
+                "arrCargo": cargos,
+                "arrCategoria": categorias,
                 "imagenUrl": imagenUrl,
-                "idEstadoAprobacion": 1
+                "idEstadoAprobacion": 1,
+                "arrEvidencias": [
+
+                ]
             }
-            Personaje.insertarPersonaje(personaje);
+            this.state.evidencias.map((evidencia) => {
+                personaje.arrEvidencias.push(evidencia);
+            });
+
+            if (Personaje.checkPersonajePorNombre(personaje)) {
+                if(window.confirm("¿Estás seguro que deseas ingresar esta información?") == true){
+                    //deshabilitar botón
+                    Personaje.insertarPersonaje(personaje);
+                }
+            }
+
 
         }
-
-
     }
     onGridRowsUpdated = ({ fromRow, toRow, updated }) => {
         this.setState(state => {
@@ -245,6 +261,9 @@ export default class ingresarCaso extends Component {
                                             // placeholder="Favorites"
                                             />
                                         )}
+                                        onChange={(event, newValue) => {
+                                            this.handleChangeValueAcCargo(event, newValue);
+                                        }}
                                     />
                                 </Col>
                             </Row>
@@ -266,6 +285,9 @@ export default class ingresarCaso extends Component {
                                             // placeholder="Favorites"
                                             />
                                         )}
+                                        onChange={(event, newValue) => {
+                                            this.handleChangeValueAcCategoria(event, newValue);
+                                        }}
                                     />
                                 </Col>
                             </Row>
@@ -315,7 +337,7 @@ export default class ingresarCaso extends Component {
                                                     <Col>Categoría evidencia:</Col>
                                                     <Col>
                                                         {/* <Input value={evidencia.titulo} name="titulo" onChange={(e) => { this.handleChangeInputEvidencia(e, evidencia); }} /> */}
-                                                        <select value={evidencia.categoriaEvidencia} class="custom-select" name="categoriaEvidencia" id="selectCargoPersonaje" onChange={(e) => { this.handleChangeInputEvidencia(e, evidencia); }}>
+                                                        <select value={evidencia.idCategoriaEvidencia} class="custom-select" name="idCategoriaEvidencia" id="selectCargoPersonaje" onChange={(e) => { this.handleChangeInputEvidencia(e, evidencia); }}>
                                                             <option value="" >- Selecciona una opción -</option>
                                                             {this.state.categoriasEvidencia.map((categoriaEvidencia) => {
                                                                 return (<option value={categoriaEvidencia.idCategoriaEvidencia}>{categoriaEvidencia.titulo}</option>);
