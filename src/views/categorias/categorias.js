@@ -37,7 +37,6 @@ export default class Categorias extends Component {
         };
     }
     async componentWillMount() {
-        debugger;
         var categoriasJSON = await Categoria.getCategorias();
         var cargosJSON = await Cargos.getCargos();
         var words = [];

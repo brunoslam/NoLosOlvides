@@ -12,7 +12,6 @@ export default function Login() {
     // }
 
     React.useEffect(() => {
-        debugger;
         if (sessionStorage.getItem(SessionNoLosOlvides.loginState) == "true") {
             window.location.href = "/#/staff/aprobacion";
         } else {
