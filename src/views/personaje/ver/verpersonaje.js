@@ -44,7 +44,7 @@ function VerPersonaje() {
 
             async function fetchData() {
                 var personaje = await Personaje.getPersonajePorId(idPersonajeBuscar);
-                debugger;
+                // debugger;
 
                 setIsLoading(false);
                 setPersonajeBuscar(personaje);
@@ -82,11 +82,11 @@ function VerPersonaje() {
                                     <h4 className="title">
                                         {personajeBuscar.nombre} {personajeBuscar.apellido} <br />
                                     </h4>
-                                    <h6 className="description">{personajeBuscar.arrRelacionCargo.map((relacionCargo) => {
-                                        return (`${relacionCargo},`)
+                                    <h6 className="description">{personajeBuscar.arrCargo.map((relacionCargo) => {
+                                        return (`${relacionCargo.titulo},`)
                                     })}</h6>
-                                    <h6 className="description">{personajeBuscar.arrRelacionCategoria.map((relacionCategoria) => {
-                                        return (`${relacionCategoria},`)
+                                    <h6 className="description">{personajeBuscar.arrCategoria.map((relacionCategoria) => {
+                                        return (`${relacionCategoria.titulo},`)
                                     })}</h6>
                                 </div>
                             </div>

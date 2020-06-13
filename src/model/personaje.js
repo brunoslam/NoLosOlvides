@@ -94,7 +94,6 @@ export default class Personaje {
         } catch (error) {
             // alert("Se ha producido un error al ingresar la información intenta más tarde");
         }
-        debugger;
         if (json?.message) {
             alert(json.message)
         } else {

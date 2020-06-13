@@ -211,7 +211,7 @@ export default class ingresarCaso extends Component {
                                     <Col className="ml-auto mr-auto text-dark font-weight-bold" md="6">*Nombre:</Col>
                                     <Col className="ml-auto mr-auto" md="6">
                                         <Input id="txtNombrePersonaje" disabled={this.props.a} value={this.props.a ? this.state.casoAprobar.nombre : null} />
-                                        <MentionsInput value={this.state.mention} onChange={this.handleChangeMention.bind(this)}>
+                                        {/* <MentionsInput value={this.state.mention} onChange={this.handleChangeMention.bind(this)}>
                                             <Mention
                                                 trigger="@"
                                                 data={this.props.users}
@@ -222,7 +222,7 @@ export default class ingresarCaso extends Component {
                                                 data={this.requestTag}
                                                 renderSuggestion={this.renderTagSuggestion}
                                             />
-                                        </MentionsInput>
+                                        </MentionsInput> */}
                                     </Col>
                                 </Row>
                                 <Row className="my-1">

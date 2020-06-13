@@ -9,7 +9,7 @@ export default function Ranking() {
     const [personajeArr, setPersonaje] = React.useState([]);
     React.useEffect(() => {
         async function fetchState() {
-            var PersonajeJSON = await Personaje.getPersonajesPendiente();
+            var PersonajeJSON = await Personaje.getPersonajes();
             setPersonaje(PersonajeJSON);
         }
         fetchState();
