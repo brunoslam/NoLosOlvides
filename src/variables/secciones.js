@@ -5,6 +5,24 @@ import Ranking from "views/ranking/ranking";
 import BuscadorAvanzado from "views/buscador-avanzado/buscadorAvanzado";
 import Login from "views/staff/login/login";
 import Logout from "views/staff/login/logout";
+const seccionesLogin = [
+    {
+        Title: "Gestionar aprobaciones",
+        Url: "#/staff/aprobar-caso",
+        Icon: "nc-icon nc-paper",
+        Component: IngresarCaso,
+        Divider: false
+    },
+    {
+        Divider: true
+    },
+    {
+        Title: "Cerrar sesión",
+        Url: "#/staff/logout",
+        Icon: "nc-icon nc-paper",
+        Component: IngresarCaso
+    }
+];
 const seccionesPagina = [
     {
         Title: "Ingresar",
@@ -35,7 +53,8 @@ const seccionesPagina = [
         Url: sessionStorage.getItem("loginState") == "true" ? "/staff/logout" : "/staff/login",
         Icon: sessionStorage.getItem("loginState") == "true" ? "nc-icon nc-lock-circle-open" : "nc-icon nc-key-25",
         Component: Login,
-        notRegister: true
+        notRegister: true,
+        subMenu: sessionStorage.getItem("loginState") == "true" ? seccionesLogin : null
     }
 
 ]

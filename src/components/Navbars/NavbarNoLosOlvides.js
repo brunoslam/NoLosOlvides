@@ -29,7 +29,11 @@ import {
   NavItem,
   NavLink,
   Nav,
-  Container
+  Container,
+  UncontrolledDropdown,
+  DropdownToggle,
+  DropdownMenu,
+  DropdownItem,
 } from "reactstrap";
 import NoLosOlvidesInfo from "variables/NoLosOlvidesInfo";
 import Secciones from "variables/secciones";
@@ -71,7 +75,7 @@ function NavbarNoLosOlvides() {
     >
       <Container>
         <div className="navbar-translate">
-        {/* <img style={{ width: "100%" }} src={require("assets/img/nolosolvides/logonolosolvides.png")} /> */}
+          {/* <img style={{ width: "100%" }} src={require("assets/img/nolosolvides/logonolosolvides.png")} /> */}
           <NavbarBrand
             data-placement="bottom"
             to="/index"
@@ -100,15 +104,34 @@ function NavbarNoLosOlvides() {
         >
           <Nav navbar>
             {
-              Secciones.map((seccion) => {
-                return (
+              Secciones.map((seccion) => (
+                (!seccion.subMenu ?
+                  // if (!seccion.subMenu) {
+                  // return (
                   <NavItem>
                     <NavLink to={seccion.Url} tag={Link}>
                       <i className={seccion.Icon} /> {seccion.Title}
                     </NavLink>
                   </NavItem>
+                  // )
+                  :
+                  // } else {
+                  // return (
+                  <UncontrolledDropdown nav inNavbar>
+                    <DropdownToggle nav caret>Sesión</DropdownToggle>
+                    <DropdownMenu right>
+                      {seccion.subMenu.map(subMenu => (
+                        subMenu.Divider ? <DropdownItem divider /> :
+                          <DropdownItem tag="a" href={subMenu.Url}>
+                            {subMenu.Title}
+                          </DropdownItem>
+                      ))}
+                    </DropdownMenu>
+                  </UncontrolledDropdown>
+                  // );
+                  // }
                 )
-              })
+              ))
             }
             {/* <NavItem>
               <NavLink to="/indexDemo" tag={Link}>
