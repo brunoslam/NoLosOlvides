@@ -1,5 +1,6 @@
 // import RegisterPage from "views/examples/RegisterPage.js";
 import IngresarCaso from "views/ingresar-caso/ingresarCaso";
+import IndexTab from "views/ingresar-caso/indexTab";
 import Categorias from "views/categorias/categorias";
 import Ranking from "views/ranking/ranking";
 import BuscadorAvanzado from "views/buscador-avanzado/buscadorAvanzado";
@@ -7,6 +8,7 @@ import Login from "views/staff/login/login";
 import Logout from "views/staff/login/logout";
 import SessionNoLosOlvides from "variables/sesiones";
 import Mantenedores from "views/staff/mantenedores/mantenedores";
+
 const seccionesLogin = [
     {
         Title: "Gestionar aprobaciones",
@@ -37,7 +39,7 @@ const seccionesPagina = [
         Title: "Ingresar",
         Url: "/ingresar",
         Icon: "nc-icon nc-paper",
-        Component: IngresarCaso
+        Component: IndexTab
     },
     {
         Title: "Buscador",
