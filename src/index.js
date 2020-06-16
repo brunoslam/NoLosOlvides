@@ -41,6 +41,7 @@ import Logout from "views/staff/login/logout";
 import VerPersonaje from "views/personaje/ver/verpersonaje";
 import TablaAprobacion from "views/staff/aprobacion/tablaAprobacion";
 import AprobarCaso from "views/staff/aprobacion/aprobacion";
+import Mantenedores from "views/staff/mantenedores/mantenedores";
 
 const hist = createBrowserHistory();
 
@@ -86,7 +87,10 @@ ReactDOM.render(
         path="/personaje"
         render={props => <VerPersonaje {...props} />}
       />
-
+      <Route
+        path="/staff/mantenedores"
+        render={props => <Mantenedores {...props} />}
+      />
       {
         Secciones.map((seccion) => {
           if (!seccion.notRegister) {

@@ -6,12 +6,20 @@ import BuscadorAvanzado from "views/buscador-avanzado/buscadorAvanzado";
 import Login from "views/staff/login/login";
 import Logout from "views/staff/login/logout";
 import SessionNoLosOlvides from "variables/sesiones";
+import Mantenedores from "views/staff/mantenedores/mantenedores";
 const seccionesLogin = [
     {
         Title: "Gestionar aprobaciones",
         Url: "#/staff/aprobacion",
         Icon: "nc-icon nc-paper",
         Component: IngresarCaso,
+        Divider: false
+    },
+    {
+        Title: "Mantenedores",
+        Url: "#/staff/mantenedores",
+        Icon: "nc-icon nc-paper",
+        Component: Mantenedores,
         Divider: false
     },
     {
