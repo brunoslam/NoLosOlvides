@@ -6,21 +6,22 @@ import Categoria from "model/categoria";
 import CategoriaEvidencia from "model/categoriaEvidencia";
 
 function insertarCargo(evt) {
-    if (validar("xd")) {
+    var valor = document.getElementById(evt.target.name).value;
+    if (validar(valor)) {
 
-        Cargo.insertarCargo({ Titulo: "xDDDDDDDDDDDDDDD" });
+        Cargo.insertarCargo({ Titulo: valor });
     }
 }
 function insertarCategoria(evt) {
-    if (validar("xd")) {
-
-        Categoria.insertarCategoria({ Titulo: "xDDDDDDDDDDDDDDD" });
+    var valor = document.getElementById(evt.target.name).value;
+    if (validar(valor)) {
+        Categoria.insertarCategoria({ Titulo: valor });
     }
 }
 function insertarCategoriaEvidencia(evt) {
-    if (validar("xd")) {
-
-        CategoriaEvidencia.insertarCategoriaEvidencia({ Titulo: "xDDDDDDDDDDDDDDD" });
+    var valor = document.getElementById(evt.target.name).value;
+    if (validar(valor)) {
+        CategoriaEvidencia.insertarCategoriaEvidencia({ Titulo: valor });
     }
 }
 function validar(value) {
@@ -36,8 +37,8 @@ export default function Mantenedores() {
                         <Col md="12"><h1>Mantenedor Cargo</h1></Col>
                     </Row>
                     <Row className="col-md-12">
-                        <Col md="12"><Input /></Col>
-                        <Col md="12"><Button onClick={(e) => { insertarCargo(e); }}>Agregar cargo</Button></Col>
+                        <Col md="12"><Input id="cargo" /></Col>
+                        <Col md="12"><Button name="cargo" onClick={(e) => { insertarCargo(e); }}>Agregar cargo</Button></Col>
                     </Row>
                 </Row>
                 <Row>
@@ -45,8 +46,8 @@ export default function Mantenedores() {
                         <Col md="12"><h1>Mantenedor Categoría</h1></Col>
                     </Row>
                     <Row className="col-md-12">
-                        <Col md="12"><Input /></Col>
-                        <Col md="12"><Button onClick={(e) => { insertarCategoria(e); }}>Agregar categoría</Button></Col>
+                        <Col md="12"><Input id="categoria" /></Col>
+                        <Col md="12"><Button name="categoria" onClick={(e) => { insertarCategoria(e); }}>Agregar categoría</Button></Col>
                     </Row>
                 </Row>
                 <Row>
@@ -54,8 +55,8 @@ export default function Mantenedores() {
                         <Col md="12"><h1>Mantenedor Categoría evidencia</h1></Col>
                     </Row>
                     <Row className="col-md-12">
-                        <Col md="12"><Input /></Col>
-                        <Col md="12"><Button onClick={(e) => { insertarCategoriaEvidencia(e); }}>Agregar categoría evidencia</Button></Col>
+                        <Col md="12"><Input id="categoriaEvidencia" /></Col>
+                        <Col md="12"><Button name="categoriaEvidencia" onClick={(e) => { insertarCategoriaEvidencia(e); }}>Agregar categoría evidencia</Button></Col>
                     </Row>
                 </Row>
             </Container>
