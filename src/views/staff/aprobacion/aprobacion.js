@@ -1,4 +1,5 @@
-import React from 'react'
+import React from 'react';
+import TemplateNoLosOlvides from "views/template/templateNoLosOlvides";
 import Ingresar from "views/ingresar-caso/ingresarCaso";
 import { Button, Container, Row, Col } from 'reactstrap';
 import SessionNoLosOlvides from "variables/sesiones";
@@ -19,7 +20,7 @@ export default function Aprobacion() {
     }
     return (
         sessionStorage.getItem(SessionNoLosOlvides.loginState) != "true" ? <></> :
-            <>
+            <TemplateNoLosOlvides>
                 <Container>
                     <Ingresar a={true} />
                     <Row>
@@ -29,6 +30,6 @@ export default function Aprobacion() {
                         </Col>
                     </Row>
                 </Container>
-            </>
+            </TemplateNoLosOlvides>
     )
 }

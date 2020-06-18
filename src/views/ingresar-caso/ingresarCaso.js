@@ -1,6 +1,5 @@
 // import React, { useState } from 'react';
-import React, { Component } from 'react'
-import TemplateNoLosOlvides from "views/template/templateNoLosOlvides";
+import React, { Component } from 'react';
 import NoLosOlvidesInfo from "variables/NoLosOlvidesInfo";
 import { makeStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
@@ -331,25 +330,25 @@ export default class ingresarCaso extends Component {
                                                     </Col>
                                                 </Row>
                                                 <Row className="my-3">
-                                                    <Col>Título:</Col>
+                                                    <Col md={12}>Título:</Col>
                                                     <Col>
                                                         <Input value={evidencia.titulo} name="titulo" disabled={this.props.a} onChange={(e) => { this.handleChangeInputEvidencia(e, evidencia); }} />
                                                     </Col>
                                                 </Row>
                                                 <Row className="my-3">
-                                                    <Col>Descripción:</Col>
+                                                    <Col md={12}>Descripción:</Col>
                                                     <Col>
                                                         <textarea className="form-control" value={evidencia.descripcion} name="descripcion" disabled={this.props.a} onChange={(e) => { this.handleChangeInputEvidencia(e, evidencia); }}></textarea>
                                                     </Col>
                                                 </Row>
                                                 <Row className="my-3">
-                                                    <Col>Fecha:</Col>
+                                                    <Col md={12}>Fecha:</Col>
                                                     <Col>
                                                         <Input type={this.props.a ? "text" : "date"} value={this.props.a ? new Date(evidencia.fecha).toLocaleDateString() : null} name="fecha" disabled={this.props.a} onChange={(e) => { this.handleChangeInputEvidencia(e, evidencia); }} />
                                                     </Col>
                                                 </Row>
                                                 <Row className="my-3">
-                                                    <Col>Categoría evidencia:</Col>
+                                                    <Col md={12}>Categoría evidencia:</Col>
                                                     <Col>
                                                         {/* <Input value={evidencia.titulo} name="titulo" onChange={(e) => { this.handleChangeInputEvidencia(e, evidencia); }} /> */}
                                                         <select value={evidencia.idCategoriaEvidencia} disabled={this.props.a} class="custom-select" name="idCategoriaEvidencia" id="selectCargoPersonaje" onChange={(e) => { this.handleChangeInputEvidencia(e, evidencia); }}>
@@ -361,9 +360,9 @@ export default class ingresarCaso extends Component {
                                                     </Col>
                                                 </Row>
                                                 <Row className="my-3">
-                                                    <Col>Links:</Col>
+                                                    <Col md={12}>Links:</Col>
                                                     <Col>
-                                                        <Input value={evidencia.url} name="url" disabled={this.props.a} onChange={(e) => { this.handleChangeInputEvidencia(e, evidencia); }} />
+                                                        <textarea  className="form-control" value={evidencia.url} name="url" disabled={this.props.a} onChange={(e) => { this.handleChangeInputEvidencia(e, evidencia); }}></textarea>
                                                     </Col>
                                                 </Row>
                                             </Col>
