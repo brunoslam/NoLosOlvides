@@ -42,7 +42,8 @@ import VerPersonaje from "views/personaje/ver/verpersonaje";
 import TablaAprobacion from "views/staff/aprobacion/tablaAprobacion";
 import AprobarCaso from "views/staff/aprobacion/aprobacion";
 import Mantenedores from "views/staff/mantenedores/mantenedores";
-
+import TablaAprobacionSugerencia from "views/staff/aprobacionSugerencia/tablaAprobacion";
+import AprobarCasoSugerencia from "views/staff/aprobacionSugerencia/aprobacion";
 const hist = createBrowserHistory();
 
 ReactDOM.render(
@@ -82,6 +83,14 @@ ReactDOM.render(
       <Route
         path="/staff/aprobar-caso"
         render={props => <AprobarCaso {...props} />}
+      />
+      <Route
+        path="/staff/verSugerencias"
+        render={props => <TablaAprobacionSugerencia {...props} />}
+      />
+      <Route
+        path="/staff/aprobar-casoSugerencia"
+        render={props => <AprobarCasoSugerencia {...props} />}
       />
       <Route
         path="/personaje"

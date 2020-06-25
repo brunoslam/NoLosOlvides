@@ -18,6 +18,13 @@ const seccionesLogin = [
         Divider: false
     },
     {
+        Title: "Gestionar sugerencias",
+        Url: "#/staff/verSugerencias",
+        Icon: "nc-icon nc-paper",
+        Component: IngresarCaso,
+        Divider: false
+    },
+    {
         Title: "Mantenedores",
         Url: "#/staff/mantenedores",
         Icon: "nc-icon nc-paper",

@@ -3,7 +3,7 @@ import TemplateNoLosOlvides from "views/template/templateNoLosOlvides";
 import { Table, Button } from 'reactstrap';
 import Personaje from "model/personaje";
 import SessionNoLosOlvides from "variables/sesiones";
-export default function TablaAprobacion() {
+export default function TablaAprobacionSugerencia() {
     const [personajesPendientes, setPersonajesPendientes] = React.useState([]);
 
     if (sessionStorage.getItem(SessionNoLosOlvides.loginState) != "true") {
@@ -27,7 +27,7 @@ export default function TablaAprobacion() {
     return (
         sessionStorage.getItem(SessionNoLosOlvides.loginState) != "true" ? <></> :
         <TemplateNoLosOlvides>
-            <h1>Aprobación casos</h1>
+            <h1>Aprobación sugerencia</h1>
             <Table>
                 <thead>
                     <tr>
