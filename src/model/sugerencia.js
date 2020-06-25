@@ -2,7 +2,7 @@
 import NoLosOlvidesInfo from "variables/NoLosOlvidesInfo";
 export default class Sugerencia {
 
-    static async insertarSugerencia(SugerenciaJson) {
+    static async ingresarSugerencia(SugerenciaJson) {
         var response = await (await fetch(`${process.env.NODE_ENV == "development" ? NoLosOlvidesInfo.urlApi : NoLosOlvidesInfo.urlApiProd}/api/Sugerencia`, {
             method: 'POST', // or 'PUT'
             body: JSON.stringify(SugerenciaJson), // data can be `string` or {object}!

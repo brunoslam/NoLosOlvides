@@ -14,7 +14,14 @@ function ingresarSugerencia(evt) {
     }
 }
 function validarIngreso(valor) {
-    return valor == null;
+    if (valor == "") {
+        alert("Debes ingresar un valor");
+        return false;
+    } else if (valor.trim().split(" ").length < 2) {
+        alert("Debes ingresar al menos un nombre y un apellido");
+        return false;
+    }
+    return true;
 }
 export default function SugerirCaso() {
     return (
