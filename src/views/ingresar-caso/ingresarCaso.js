@@ -204,7 +204,7 @@ export default class ingresarCaso extends Component {
             return (
                 <Container>
                     <Row>
-                        <Col className="ml-auto mr-auto" md="6">
+                        <Col className="ml-auto mr-auto" md="8">
                             <Row className="my-1">
                                 <Col className="ml-auto mr-auto text-dark font-weight-bold" md="6">*Nombre:</Col>
                                 <Col className="ml-auto mr-auto" md="6">
