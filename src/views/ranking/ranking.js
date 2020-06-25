@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import TemplateNoLosOlvides from "views/template/templateNoLosOlvides";
 import Personaje from "model/personaje";
 import {
@@ -7,14 +7,20 @@ import {
 } from 'reactstrap';
 export default function Ranking() {
     const [personajeArr, setPersonaje] = React.useState([]);
-    React.useEffect(() => {
-        async function fetchState() {
+    const [isLoading, setIsLoading] = React.useState(true);
+
+    async function fetchState() {
+        if (isLoading) {
             var PersonajeJSON = await Personaje.getPersonajes();
+            setIsLoading(false);
             setPersonaje(PersonajeJSON);
         }
-        fetchState();
 
-    });
+    }
+    useEffect(() => {
+        fetchState();
+    }, [isLoading]);
+    
     return (
         <TemplateNoLosOlvides>
             <p>Ranking</p>
